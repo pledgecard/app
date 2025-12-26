@@ -15,9 +15,10 @@ Pledge Card Uganda is a crowdfunding platform built with React, TypeScript, and 
 
 ## Environment Setup
 
-The app requires two API keys set in `.env.local`:
-- `GEMINI_API_KEY` - For AI-powered campaign description generation
-- Supabase credentials (optional for local testing): `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+The app requires environment variables set in `.env` or `.env.local`:
+- `GEMINI_API_KEY` - For AI-powered campaign description generation (injected via Vite's `define` as `process.env.API_KEY`)
+- `VITE_SUPABASE_URL` - Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous/public key
 
 The Vite config injects the Gemini key at build time via `process.env.API_KEY` and `process.env.GEMINI_API_KEY`.
 
@@ -71,16 +72,23 @@ Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
 **AI Integration**
 - `geminiService.ts` uses `@google/genai` SDK with model `gemini-3-flash-preview`
 - Returns HTML-formatted descriptions (not markdown)
+- Prompts include Uganda-specific context and 250-word limit
 
 **Styling**
-- Tailwind CSS with custom brand colors (purple/amber)
-- Custom fonts: Inter (sans), Outfit (display)
-- Prose classes for rich text content styling
+- Tailwind CSS with custom brand colors (`brand`: purple, `accent`: amber)
+- Font: Poppins for both sans and display
+- Custom shadows: `shadow-soft`, `shadow-glow`
 
 ## State Management
 
-The app uses React hooks and Supabase real-time subscriptions. No global state library (Redux/Context) is implemented yet.
+The app uses React hooks (useState, useEffect) and Supabase real-time subscriptions. No global state library (Redux/Context) is implemented yet.
 
 ## Payment Integration
 
 Currently simulated in `PaymentSimulation.tsx` for MTN, Airtel, and VISA. Real payment gateway integration is pending.
+
+## Vite Configuration
+
+- Dev server runs on port 3000 with host `0.0.0.0`
+- Path alias `@` resolves to project root
+- Gemini API key injected at build time via `process.env`
