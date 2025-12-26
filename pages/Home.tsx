@@ -447,7 +447,7 @@ export const Home: React.FC = () => {
 
                 <div className="flex items-center gap-4">
                   <div className="h-14 w-14 rounded-full bg-brand-200 border-2 border-brand-500 overflow-hidden shadow-lg">
-                    <img src="https://picsum.photos/100/100?random=50" alt="User" className="w-full h-full object-cover" />
+                    <img src="/success-stories/mary_profile.png" alt="User" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <p className="text-white font-bold text-lg">Mary N.</p>
@@ -457,7 +457,7 @@ export const Home: React.FC = () => {
               </div>
               <div className="relative mt-8 lg:mt-0">
                 <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-700/30 transform rotate-2 hover:rotate-0 transition-all duration-700">
-                  <img src="https://picsum.photos/800/600?random=60" alt="Success Story" className="w-full h-full object-cover" />
+                  <img src="/success-stories/borehole_success.png" alt="Success Story" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </div>
                 {/* Floating Badge */}

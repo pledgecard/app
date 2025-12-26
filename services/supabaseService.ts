@@ -198,6 +198,42 @@ export const SupabaseService = {
         return data as Donation[];
     },
 
+    getAllDonations: async () => {
+        const { data, error } = await supabase
+            .from('donations')
+            .select(`
+                *,
+                profiles (full_name),
+                campaigns (title)
+            `)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return data.map(d => ({
+            ...d,
+            donorName: d.profiles?.full_name || 'Anonymous',
+            campaignTitle: d.campaigns?.title || 'Unknown Campaign'
+        }));
+    },
+
+    getAllPledges: async () => {
+        const { data, error } = await supabase
+            .from('pledges')
+            .select(`
+                *,
+                profiles (full_name),
+                campaigns (title)
+            `)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return data.map(p => ({
+            ...p,
+            pledgerName: p.profiles?.full_name || 'Anonymous',
+            campaignTitle: p.campaigns?.title || 'Unknown Campaign'
+        }));
+    },
+
     getCurrentUser: async (): Promise<User | null> => {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) return null;

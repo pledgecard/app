@@ -181,6 +181,26 @@ export const MockApi = {
     });
   },
 
+  getAllDonations: async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(donations.map(d => ({
+        ...d,
+        donorName: MOCK_USERS.find(u => u.id === d.userId)?.fullName || 'Anonymous',
+        campaignTitle: campaigns.find(c => c.id === d.campaignId)?.title || 'Unknown Campaign'
+      }))), 400);
+    });
+  },
+
+  getAllPledges: async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(pledges.map(p => ({
+        ...p,
+        pledgerName: MOCK_USERS.find(u => u.id === p.userId)?.fullName || 'Anonymous',
+        campaignTitle: campaigns.find(c => c.id === p.campaignId)?.title || 'Unknown Campaign'
+      }))), 400);
+    });
+  },
+
   getCurrentUser: async (): Promise<User | null> => {
     return MOCK_USERS[0];
   },
