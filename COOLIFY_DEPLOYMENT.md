@@ -9,7 +9,6 @@ This guide will help you deploy the PledgeCard Uganda app on Hostinger VPS using
 - Hostinger KVM 8 VPS with Coolify installed
 - GitHub repository: https://github.com/pledgecard/app
 - Supabase project credentials
-- Google Gemini API key
 
 ---
 
@@ -94,7 +93,6 @@ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
 
 | Key | Value | Description |
 |-----|-------|-------------|
-| `GEMINI_API_KEY` | `your_gemini_api_key` | Google Gemini AI key |
 | `VITE_SUPABASE_URL` | `your_supabase_url` | Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | `your_supabase_anon_key` | Supabase anonymous key |
 
@@ -115,7 +113,6 @@ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
 
 These are already configured in Build Settings above:
 
-- `GEMINI_API_KEY` - Required for AI description generation
 - `VITE_SUPABASE_URL` - Your Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Your Supabase anonymous key
 
@@ -221,7 +218,7 @@ Coolify can automatically deploy when you push to GitHub:
 **Solution:**
 - Verify build arguments are correctly set
 - Check for typos in API keys
-- Ensure `GEMINI_API_KEY` is set (app will show "AI Service not configured" without it)
+- Ensure Supabase credentials are correct
 
 ### 502 Bad Gateway
 
@@ -315,11 +312,6 @@ The Dockerfile includes several optimizations:
 3. ✅ No sensitive data in repository
 4. ✅ Build-time environment variables
 5. ✅ Regular dependency updates
-
-**Important Note:** The `GEMINI_API_KEY` is embedded in the bundled JavaScript. For production, consider:
-- Moving API calls through a backend service
-- Using a serverless function to proxy the request
-- Implementing rate limiting
 
 ---
 

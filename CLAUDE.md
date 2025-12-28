@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Pledge Card Uganda is a crowdfunding platform built with React, TypeScript, and Vite. It allows users to create campaigns, receive instant donations, and collect future pledges with local payment integration (MTN Mobile Money, Airtel Money, VISA). The app uses Supabase for authentication and data persistence, and Google Gemini AI for generating campaign descriptions.
+Pledge Card Uganda is a crowdfunding platform built with React, TypeScript, and Vite. It allows users to create campaigns, receive instant donations, and collect future pledges with local payment integration (MTN Mobile Money, Airtel Money, VISA). The app uses Supabase for authentication and data persistence.
 
 ## Development Commands
 
@@ -16,11 +16,8 @@ Pledge Card Uganda is a crowdfunding platform built with React, TypeScript, and 
 ## Environment Setup
 
 The app requires environment variables set in `.env` or `.env.local`:
-- `GEMINI_API_KEY` - For AI-powered campaign description generation (injected via Vite's `define` as `process.env.API_KEY`)
 - `VITE_SUPABASE_URL` - Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Supabase anonymous/public key
-
-The Vite config injects the Gemini key at build time via `process.env.API_KEY` and `process.env.GEMINI_API_KEY` for compatibility with the geminiService.
 
 ## Architecture
 
@@ -42,10 +39,8 @@ The Vite config injects the Gemini key at build time via `process.env.API_KEY` a
 │   ├── CampaignDetails.tsx # Single campaign view with donation/pledge
 │   ├── Auth.tsx           # OAuth login (Google)
 │   ├── Dashboard.tsx      # User dashboard (my campaigns, pledges)
-│   ├── CreateCampaign.tsx # Campaign creation with AI generation
+│   ├── CreateCampaign.tsx # Campaign creation
 │   └── AdminDashboard.tsx # Campaign moderation
-├── services/
-│   └── geminiService.ts   # AI description generation
 ├── lib/
 │   └── supabase.ts        # Supabase client initialization
 ├── types.ts               # TypeScript interfaces/enums
@@ -67,12 +62,7 @@ Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
 **Rich Text Editor**
 - Custom `contentEditable` div with toolbar buttons using `document.execCommand()`
 - Supports bold, italic, headings (H2, H3), lists, quotes, text alignment, and image upload (base64)
-- Syncs with external value changes via useEffect (e.g., when AI generates content, updates editor without losing focus)
-
-**AI Integration**
-- `geminiService.ts` uses `@google/genai` SDK with model `gemini-3-flash-preview`
-- Returns HTML-formatted descriptions (not markdown) with tags like `<h3>`, `<p>`, `<ul>`, `<li>`, `<strong>`, `<blockquote>`
-- Prompts include Uganda-specific context and 250-word limit
+- Syncs with external value changes via useEffect
 
 **Styling**
 - Tailwind CSS with custom brand colors (`brand`: purple, `accent`: amber)
@@ -91,4 +81,3 @@ Currently simulated in `PaymentSimulation.tsx` for MTN, Airtel, and VISA. Real p
 
 - Dev server runs on port 3000 with host `0.0.0.0` (accessible from network)
 - Path alias `@` resolves to project root directory
-- Gemini API key injected via `define:` `process.env.API_KEY` and `process.env.GEMINI_API_KEY`
