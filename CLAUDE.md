@@ -20,7 +20,7 @@ The app requires environment variables set in `.env` or `.env.local`:
 - `VITE_SUPABASE_URL` - Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Supabase anonymous/public key
 
-The Vite config injects the Gemini key at build time via `process.env.API_KEY` and `process.env.GEMINI_API_KEY`.
+The Vite config injects the Gemini key at build time via `process.env.API_KEY` and `process.env.GEMINI_API_KEY` for compatibility with the geminiService.
 
 ## Architecture
 
@@ -57,7 +57,7 @@ The Vite config injects the Gemini key at build time via `process.env.API_KEY` a
 **Routing & Auth Flow**
 - Uses `HashRouter` for compatibility
 - Auth state managed via Supabase OAuth (Google provider)
-- `AuthListener` component in App.tsx handles OAuth callback tokens from URL hash and redirects to dashboard
+- `AuthListener` component in App.tsx handles OAuth callback tokens from URL hash (format: `#access_token=...&refresh_token=...`) and redirects to dashboard
 - Auth state changes trigger automatic navigation (`/dashboard` on sign-in, `/login` on sign-out)
 
 **Data Types**
@@ -66,12 +66,12 @@ Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
 
 **Rich Text Editor**
 - Custom `contentEditable` div with toolbar buttons using `document.execCommand()`
-- Supports bold, italic, headings, lists, quotes, alignment, and image upload (base64)
-- Syncs with external value changes (e.g., AI-generated content)
+- Supports bold, italic, headings (H2, H3), lists, quotes, text alignment, and image upload (base64)
+- Syncs with external value changes via useEffect (e.g., when AI generates content, updates editor without losing focus)
 
 **AI Integration**
 - `geminiService.ts` uses `@google/genai` SDK with model `gemini-3-flash-preview`
-- Returns HTML-formatted descriptions (not markdown)
+- Returns HTML-formatted descriptions (not markdown) with tags like `<h3>`, `<p>`, `<ul>`, `<li>`, `<strong>`, `<blockquote>`
 - Prompts include Uganda-specific context and 250-word limit
 
 **Styling**
@@ -89,6 +89,6 @@ Currently simulated in `PaymentSimulation.tsx` for MTN, Airtel, and VISA. Real p
 
 ## Vite Configuration
 
-- Dev server runs on port 3000 with host `0.0.0.0`
-- Path alias `@` resolves to project root
-- Gemini API key injected at build time via `process.env`
+- Dev server runs on port 3000 with host `0.0.0.0` (accessible from network)
+- Path alias `@` resolves to project root directory
+- Gemini API key injected via `define:` `process.env.API_KEY` and `process.env.GEMINI_API_KEY`
