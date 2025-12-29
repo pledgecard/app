@@ -25,7 +25,11 @@ The app requires environment variables set in `.env` or `.env.local`:
 
 ```
 ├── App.tsx                 # Main router with auth state listener
+├── index.html              # HTML entry point with favicon
 ├── index.tsx               # React entry point
+├── netlify.toml            # Netlify deployment configuration
+├── Dockerfile              # Docker container configuration
+├── nginx.conf              # Nginx configuration for Docker
 ├── components/             # Reusable UI components
 │   ├── Navbar.tsx         # Navigation with auth state
 │   ├── Footer.tsx
@@ -43,6 +47,8 @@ The app requires environment variables set in `.env` or `.env.local`:
 │   └── AdminDashboard.tsx # Campaign moderation
 ├── lib/
 │   └── supabase.ts        # Supabase client initialization
+├── public/                 # Static assets
+│   └── logo.png           # Logo used as favicon
 ├── types.ts               # TypeScript interfaces/enums
 └── supabase_schema.sql    # Database schema reference
 ```
@@ -81,3 +87,55 @@ Currently simulated in `PaymentSimulation.tsx` for MTN, Airtel, and VISA. Real p
 
 - Dev server runs on port 3000 with host `0.0.0.0` (accessible from network)
 - Path alias `@` resolves to project root directory
+
+## Deployment
+
+### Production Environment
+- **Live URL:** https://pledgecard.co
+- **Platform:** Netlify
+- **Auto-deploys:** On push to `main` branch
+
+### Environment Variables (Netlify)
+Configure in Netlify Site Settings → Environment variables:
+- `VITE_SUPABASE_URL` - Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous/public key
+
+### Supabase Configuration
+For authentication to work correctly, configure in Supabase Dashboard:
+
+**Authentication → URL Configuration:**
+- **Site URL:** `https://pledgecard.co`
+- **Redirect URLs:**
+  - `https://pledgecard.co/#/dashboard`
+  - `https://pledgecard.co`
+  - `https://www.pledgecard.co/#/dashboard`
+  - `https://www.pledgecard.co`
+
+### Deployment Files
+
+**Netlify Configuration (`netlify.toml`)**
+- Build command: `npm run build`
+- Publish directory: `dist`
+- MIME type headers for JS/CSS files to fix Vite module loading
+
+**Docker Deployment (`Dockerfile`, `nginx.conf`)**
+- Multi-stage build with Node 20 Alpine and Nginx Alpine
+- Container runs on port 8080 (can be adjusted for host restrictions)
+- Suitable for Coolify or other Docker-based deployments
+
+### Known Issues & Solutions
+
+**Netlify MIME Type Error:**
+If you see "Expected a JavaScript module script but got 'application/octet-stream'", the `netlify.toml` file handles this with proper Content-Type headers.
+
+**Coolify Port Conflicts:**
+- Port 80 often conflicts with Coolify's proxy
+- Use port 8080 (configured in Dockerfile/nginx.conf)
+- Enable "Is it a static site?" in Coolify for automatic routing
+
+**Supabase OAuth Redirects to Localhost:**
+- Update Site URL and Redirect URLs in Supabase Dashboard
+- Must match production domain (pledgecard.co)
+
+### Favicon
+The app uses `/public/logo.png` as the favicon, configured in `index.html`.
