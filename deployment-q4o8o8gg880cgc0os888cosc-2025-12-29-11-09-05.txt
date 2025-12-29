@@ -1,0 +1,147 @@
+2025-Dec-29 11:08:17.175890 Starting deployment of pledgecard/app:main to localhost.
+2025-Dec-29 11:08:17.334661 Preparing container with helper image: ghcr.io/coollabsio/coolify-helper:1.0.12
+2025-Dec-29 11:08:18.243304 ----------------------------------------
+2025-Dec-29 11:08:18.246807 Importing pledgecard/app:main (commit sha b3d066bfd9184852627d3ef58f26e31f55fb41ee) to /artifacts/q4o8o8gg880cgc0os888cosc.
+2025-Dec-29 11:08:19.543937 Image not found (jgs8w840ks44go4c8ww0kckk:b3d066bfd9184852627d3ef58f26e31f55fb41ee). Building new image.
+2025-Dec-29 11:08:20.867380 ----------------------------------------
+2025-Dec-29 11:08:20.871186 Building docker image started.
+2025-Dec-29 11:08:20.874688 To check the current progress, click on Show Debug Logs.
+2025-Dec-29 11:08:25.051292 ========================================
+2025-Dec-29 11:08:25.055440 Deployment failed: Command execution failed (exit code 1): docker exec q4o8o8gg880cgc0os888cosc bash -c 'bash /artifacts/build.sh'
+2025-Dec-29 11:08:25.055440 Error: #0 building with "default" instance using docker driver
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #1 [internal] load build definition from Dockerfile
+2025-Dec-29 11:08:25.055440 #1 transferring dockerfile: 1.55kB done
+2025-Dec-29 11:08:25.055440 #1 DONE 0.0s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #2 [internal] load metadata for docker.io/library/node:20-alpine
+2025-Dec-29 11:08:25.055440 #2 ...
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #3 [internal] load metadata for docker.io/library/nginx:alpine
+2025-Dec-29 11:08:25.055440 #3 DONE 1.3s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #2 [internal] load metadata for docker.io/library/node:20-alpine
+2025-Dec-29 11:08:25.055440 #2 DONE 1.4s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #4 [internal] load .dockerignore
+2025-Dec-29 11:08:25.055440 #4 transferring context: 450B done
+2025-Dec-29 11:08:25.055440 #4 DONE 0.0s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2025-Dec-29 11:08:25.055440 #5 resolve docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448 0.0s done
+2025-Dec-29 11:08:25.055440 #5 DONE 0.1s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #6 [stage-1 1/4] FROM docker.io/library/nginx:alpine@sha256:8491795299c8e739b7fcc6285d531d9812ce2666e07bd3dd8db00020ad132295
+2025-Dec-29 11:08:25.055440 #6 resolve docker.io/library/nginx:alpine@sha256:8491795299c8e739b7fcc6285d531d9812ce2666e07bd3dd8db00020ad132295 0.0s done
+2025-Dec-29 11:08:25.055440 #6 ...
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #7 [internal] load build context
+2025-Dec-29 11:08:25.055440 #7 transferring context: 7.98MB 0.0s done
+2025-Dec-29 11:08:25.055440 #7 DONE 0.1s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #6 [stage-1 1/4] FROM docker.io/library/nginx:alpine@sha256:8491795299c8e739b7fcc6285d531d9812ce2666e07bd3dd8db00020ad132295
+2025-Dec-29 11:08:25.055440 #6 sha256:de54cb821236c86af111bf7a17c40e42b3a5ad0e08c1a5ec76fb654d35f58df8 0B / 17.26MB 0.2s
+2025-Dec-29 11:08:25.055440 #6 sha256:de54cb821236c86af111bf7a17c40e42b3a5ad0e08c1a5ec76fb654d35f58df8 6.29MB / 17.26MB 0.3s
+2025-Dec-29 11:08:25.055440 #6 sha256:0abf9e5672665202e79f26f23ef5dbd12558e2ea51ac32807922ab76fdb24ab0 0B / 1.40kB 0.2s
+2025-Dec-29 11:08:25.055440 #6 sha256:de54cb821236c86af111bf7a17c40e42b3a5ad0e08c1a5ec76fb654d35f58df8 17.26MB / 17.26MB 0.5s done
+2025-Dec-29 11:08:25.055440 #6 sha256:0abf9e5672665202e79f26f23ef5dbd12558e2ea51ac32807922ab76fdb24ab0 1.40kB / 1.40kB 0.2s done
+2025-Dec-29 11:08:25.055440 #6 sha256:085c5e5aaa8eb4b957ecf253c74f16a6a5551231de3fb7c3ac74814a6bf17e06 1.21kB / 1.21kB 0.2s done
+2025-Dec-29 11:08:25.055440 #6 sha256:33f95a0f3229b49e777082e801b882b13fcc5b4e389410ce8eb066f4d58c71b9 403B / 403B 0.2s done
+2025-Dec-29 11:08:25.055440 #6 sha256:567f84da6fbd4287d40a5837485469435c40a81f9a94e98395b6385d3600643a 0B / 626B 0.2s
+2025-Dec-29 11:08:25.055440 #6 sha256:da7c973d8b92a1555060972c8849a332c93bfe2608c11faeee2098c4cfbe8c3d 0B / 953B 0.2s
+2025-Dec-29 11:08:25.055440 #6 sha256:567f84da6fbd4287d40a5837485469435c40a81f9a94e98395b6385d3600643a 626B / 626B 0.3s done
+2025-Dec-29 11:08:25.055440 #6 sha256:da7c973d8b92a1555060972c8849a332c93bfe2608c11faeee2098c4cfbe8c3d 953B / 953B 0.2s done
+2025-Dec-29 11:08:25.055440 #6 sha256:25f453064fd3e8a9754b6e51b86c637e13203cbfc748fcf73f3c8b2d10816ae3 0B / 1.86MB 0.2s
+2025-Dec-29 11:08:25.055440 #6 sha256:25f453064fd3e8a9754b6e51b86c637e13203cbfc748fcf73f3c8b2d10816ae3 1.86MB / 1.86MB 0.3s done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:25f453064fd3e8a9754b6e51b86c637e13203cbfc748fcf73f3c8b2d10816ae3
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:25f453064fd3e8a9754b6e51b86c637e13203cbfc748fcf73f3c8b2d10816ae3 0.1s done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:567f84da6fbd4287d40a5837485469435c40a81f9a94e98395b6385d3600643a done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:da7c973d8b92a1555060972c8849a332c93bfe2608c11faeee2098c4cfbe8c3d done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:33f95a0f3229b49e777082e801b882b13fcc5b4e389410ce8eb066f4d58c71b9 done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:085c5e5aaa8eb4b957ecf253c74f16a6a5551231de3fb7c3ac74814a6bf17e06 done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:0abf9e5672665202e79f26f23ef5dbd12558e2ea51ac32807922ab76fdb24ab0 done
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:de54cb821236c86af111bf7a17c40e42b3a5ad0e08c1a5ec76fb654d35f58df8
+2025-Dec-29 11:08:25.055440 #6 extracting sha256:de54cb821236c86af111bf7a17c40e42b3a5ad0e08c1a5ec76fb654d35f58df8 0.2s done
+2025-Dec-29 11:08:25.055440 #6 DONE 1.3s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2025-Dec-29 11:08:25.055440 #5 sha256:fd1849a5c548bc65ee47a64498951bda5d40e87d08efe9dca69b5c8cdedc7a52 443B / 443B 0.2s done
+2025-Dec-29 11:08:25.055440 #5 sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3 1.26MB / 1.26MB 0.4s done
+2025-Dec-29 11:08:25.055440 #5 sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 42.78MB / 42.78MB 0.9s done
+2025-Dec-29 11:08:25.055440 #5 extracting sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697
+2025-Dec-29 11:08:25.055440 #5 ...
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #8 [stage-1 2/4] COPY nginx.conf /etc/nginx/conf.d/default.conf
+2025-Dec-29 11:08:25.055440 #8 DONE 0.1s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2025-Dec-29 11:08:25.055440 #5 extracting sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 0.7s done
+2025-Dec-29 11:08:25.055440 #5 DONE 1.7s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2025-Dec-29 11:08:25.055440 #5 extracting sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3 0.0s done
+2025-Dec-29 11:08:25.055440 #5 extracting sha256:fd1849a5c548bc65ee47a64498951bda5d40e87d08efe9dca69b5c8cdedc7a52 done
+2025-Dec-29 11:08:25.055440 #5 DONE 1.7s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #9 [builder 2/6] WORKDIR /app
+2025-Dec-29 11:08:25.055440 #9 DONE 0.0s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #10 [builder 3/6] COPY package.json package-lock.json* ./
+2025-Dec-29 11:08:25.055440 #10 DONE 0.0s
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 #11 [builder 4/6] RUN npm ci
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error code EUSAGE
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error The `npm ci` command can only install with an existing package-lock.json or
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error later to generate a package-lock.json file, then try again.
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error Clean install a project
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error Usage:
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error npm ci
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error Options:
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [--no-bin-links] [--no-fund] [--dry-run]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error aliases: clean-install, ic, install-clean, isntall-clean
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error
+2025-Dec-29 11:08:25.055440 #11 0.404 npm error Run "npm help ci" for more info
+2025-Dec-29 11:08:25.055440 #11 0.405 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-12-29T11_08_24_690Z-debug-0.log
+2025-Dec-29 11:08:25.055440 #11 ERROR: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+2025-Dec-29 11:08:25.055440 ------
+2025-Dec-29 11:08:25.055440 > [builder 4/6] RUN npm ci:
+2025-Dec-29 11:08:25.055440 0.404 npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+2025-Dec-29 11:08:25.055440 0.404 npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+2025-Dec-29 11:08:25.055440 0.404 npm error [--no-bin-links] [--no-fund] [--dry-run]
+2025-Dec-29 11:08:25.055440 0.404 npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+2025-Dec-29 11:08:25.055440 0.404 npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+2025-Dec-29 11:08:25.055440 0.404 npm error
+2025-Dec-29 11:08:25.055440 0.404 npm error aliases: clean-install, ic, install-clean, isntall-clean
+2025-Dec-29 11:08:25.055440 0.404 npm error
+2025-Dec-29 11:08:25.055440 0.404 npm error Run "npm help ci" for more info
+2025-Dec-29 11:08:25.055440 0.405 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-12-29T11_08_24_690Z-debug-0.log
+2025-Dec-29 11:08:25.055440 ------
+2025-Dec-29 11:08:25.055440
+2025-Dec-29 11:08:25.055440 2 warnings found (use docker --debug to expand):
+2025-Dec-29 11:08:25.055440 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "VITE_SUPABASE_ANON_KEY") (line 22)
+2025-Dec-29 11:08:25.055440 - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "VITE_SUPABASE_ANON_KEY") (line 26)
+2025-Dec-29 11:08:25.055440 Dockerfile:15
+2025-Dec-29 11:08:25.055440 --------------------
+2025-Dec-29 11:08:25.055440 13 |
+2025-Dec-29 11:08:25.055440 14 | # Install dependencies
+2025-Dec-29 11:08:25.055440 15 | >>> RUN npm ci
+2025-Dec-29 11:08:25.055440 16 |
+2025-Dec-29 11:08:25.055440 17 | # Copy source code
+2025-Dec-29 11:08:25.055440 --------------------
+2025-Dec-29 11:08:25.055440 ERROR: failed to build: failed to solve: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+2025-Dec-29 11:08:25.055440 exit status 1
+2025-Dec-29 11:08:25.096810 ========================================
+2025-Dec-29 11:08:25.101091 Deployment failed. Removing the new version of your application.
+2025-Dec-29 11:08:25.436936 Gracefully shutting down build container: q4o8o8gg880cgc0os888cosc
