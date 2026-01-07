@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, User as UserIcon, LogOut, LayoutDashboard, Settings } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ApiService } from '../services/api';
-import { User } from '../types';
+import { User, UserRole } from '../types';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -47,7 +47,9 @@ export const Navbar: React.FC = () => {
             <Link to="/campaigns" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/campaigns')}`}>Explore</Link>
             <Link to="/create" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/create')}`}>Start Campaign</Link>
             <Link to="/dashboard" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/dashboard')}`}>Dashboard</Link>
-            <Link to="/admin" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/admin')}`}>Admin</Link>
+            {user?.role === UserRole.ADMIN && (
+              <Link to="/admin" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/admin')}`}>Admin</Link>
+            )}
 
             <div className="ml-4 pl-4 border-l border-gray-200">
               {user ? (
@@ -115,7 +117,9 @@ export const Navbar: React.FC = () => {
               <Link to="/campaigns" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Explore</Link>
               <Link to="/create" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Start Campaign</Link>
               <Link to="/dashboard" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Dashboard</Link>
-              <Link to="/admin" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Admin</Link>
+              {user?.role === UserRole.ADMIN && (
+                <Link to="/admin" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Admin</Link>
+              )}
 
               {!user ? (
                 <div className="pt-4 mt-4 border-t border-gray-100">

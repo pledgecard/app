@@ -19,6 +19,8 @@ The app requires environment variables set in `.env` or `.env.local`:
 - `VITE_SUPABASE_URL` - Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Supabase anonymous/public key
 
+**Important:** Vite environment variables are build-time only. When deploying with Docker or Netlify, these must be available during the build process, not at runtime.
+
 ## Architecture
 
 ### Project Structure
@@ -56,14 +58,21 @@ The app requires environment variables set in `.env` or `.env.local`:
 ### Key Architecture Patterns
 
 **Routing & Auth Flow**
-- Uses `HashRouter` for compatibility
+- Uses `HashRouter` for compatibility (supports deployment setups without server-side routing config)
 - Auth state managed via Supabase OAuth (Google provider)
-- `AuthListener` component in App.tsx handles OAuth callback tokens from URL hash (format: `#access_token=...&refresh_token=...`) and redirects to dashboard
+- `AuthListener` component in App.tsx handles OAuth callback tokens from URL hash (format: `#access_token=...&refresh_token=...`)
+- OAuth flow: Google redirects to `/#access_token=...`, AuthListener parses hash, calls `supabase.auth.setSession()`, then redirects to `/dashboard`
 - Auth state changes trigger automatic navigation (`/dashboard` on sign-in, `/login` on sign-out)
 
 **Data Types**
 Core entities: `User`, `Campaign`, `Pledge`, `Donation`
 Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
+
+**Database Schema & Triggers**
+- Supabase PostgreSQL with Row Level Security (RLS) enabled
+- Triggers automatically update campaign `raised_amount` and `pledged_amount` when donations/pledges are created
+- Storage bucket `campaign-images` for file uploads with public read access
+- RLS policies: Approved campaigns are public, users can only see their own pledges/donations
 
 **Rich Text Editor**
 - Custom `contentEditable` div with toolbar buttons using `document.execCommand()`
@@ -120,8 +129,9 @@ For authentication to work correctly, configure in Supabase Dashboard:
 
 **Docker Deployment (`Dockerfile`, `nginx.conf`)**
 - Multi-stage build with Node 20 Alpine and Nginx Alpine
-- Container runs on port 8080 (can be adjusted for host restrictions)
+- Container runs on port 8080 (Note: COOLIFY_DEPLOYMENT.md incorrectly mentions port 80)
 - Suitable for Coolify or other Docker-based deployments
+- Environment variables must be passed as build arguments (ARG) during image build
 
 ### Known Issues & Solutions
 
@@ -130,8 +140,9 @@ If you see "Expected a JavaScript module script but got 'application/octet-strea
 
 **Coolify Port Conflicts:**
 - Port 80 often conflicts with Coolify's proxy
-- Use port 8080 (configured in Dockerfile/nginx.conf)
-- Enable "Is it a static site?" in Coolify for automatic routing
+- Dockerfile exposes port 8080 (not port 80)
+- Coolify will automatically proxy the container to its public domain
+- Environment variables must be set as build arguments in Coolify, not runtime env vars
 
 **Supabase OAuth Redirects to Localhost:**
 - Update Site URL and Redirect URLs in Supabase Dashboard

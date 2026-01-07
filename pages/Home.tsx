@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CampaignCard } from '../components/CampaignCard';
 import { Campaign } from '../types';
 import { ApiService } from '../services/api';
-import { ArrowRight, ShieldCheck, Zap, Users, Heart, TrendingUp, CheckCircle2, Sprout, Quote, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Zap, Users, Heart, TrendingUp, CheckCircle2, Sprout, Quote, ArrowUpRight, Building, Briefcase, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const FloatAnimation = () => (
@@ -127,17 +127,13 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto pt-10 pb-10">
             <span className="inline-block py-1 px-3 rounded-full bg-brand-50 border border-brand-100 font-bold text-brand-700 tracking-wide text-xs uppercase mb-6 shadow-sm">
-              #1 crowdfunding platform in Uganda
+              Africa's Trusted Crowdfunding Platform
             </span>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold text-gray-900 mb-10 leading-[0.95] tracking-tight">
-              Helping <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700 relative inline-block">
-                Ugandans
-                {/* Creative Underline */}
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-brand-200 -z-10 opacity-70" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
-                </svg>
+              Empowering <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700">
+                Africans
               </span> <br />
               fundraise
             </h1>
@@ -209,14 +205,14 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative pl-6 md:pl-0">
               <h3 className="text-3xl font-display font-bold text-gray-900 leading-tight">
-                More than <span className="text-brand-600 bg-brand-50 px-2 rounded-lg">UGX 500 million</span> is raised every week on PledgeCard.*
+                Over <span className="text-brand-600 bg-brand-50 px-2 rounded-lg">UGX 10 million</span> raised across 8 African countries.*
               </h3>
               {/* Decorative line */}
               <div className="absolute left-0 md:-left-6 top-2 bottom-2 w-1.5 bg-gradient-to-b from-brand-300 to-brand-500 rounded-full"></div>
             </div>
             <div>
               <p className="text-gray-500 text-lg leading-relaxed">
-                Get started in just a few minutes — with helpful new tools, it’s easier than ever to pick the perfect title, write a compelling story, and share it with the world.
+                From Kampala to Lagos, our platform connects those who need support with those willing to give — making crowdfunding accessible, secure, and transparent across the continent.
               </p>
             </div>
           </div>
@@ -241,7 +237,7 @@ export const Home: React.FC = () => {
                 <TrendingUp className="w-8 h-8" />
               </div>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                500M+
+                10M+
               </h3>
               <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
                 UGX Raised
@@ -254,10 +250,10 @@ export const Home: React.FC = () => {
                 <Heart className="w-8 h-8" />
               </div>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                1.2k
+                15k+
               </h3>
               <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                Pledges Made
+                Active Users
               </p>
             </div>
 
@@ -267,7 +263,7 @@ export const Home: React.FC = () => {
                 <ShieldCheck className="w-8 h-8" />
               </div>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                100%
+                200+
               </h3>
               <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
                 Verified Campaigns
@@ -280,10 +276,10 @@ export const Home: React.FC = () => {
                 <Users className="w-8 h-8" />
               </div>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                50+
+                8
               </h3>
               <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                Communities Helped
+                African Countries
               </p>
             </div>
 
@@ -300,15 +296,10 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
-              Why <span className="text-brand-600 relative">
-                PledgeCard?
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-brand-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
-                </svg>
-              </span>
+              Why <span className="text-brand-600">PledgeCard?</span>
             </h2>
             <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-              We bridge the gap between intention and action with technology built specifically for the Ugandan context.
+              We bridge the gap between intention and action with technology built for the African context — serving 8 countries with localized payment integrations.
             </p>
           </div>
 
@@ -351,6 +342,77 @@ export const Home: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-block text-brand-600 font-bold tracking-wider uppercase text-sm mb-4">
+              What We Offer
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
+              Beyond Traditional Fundraising
+            </h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+              Powerful tools and features designed to transform how Africa gives.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Service 1 - Personal */}
+            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <Heart className="h-10 w-10 text-brand-600" strokeWidth={1.5} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-brand-600 text-center mb-3">Personal Fundraising</h3>
+              <p className="text-gray-600 text-center text-sm leading-relaxed">
+                Medical emergencies, education fees, memorials & more
+              </p>
+            </div>
+
+            {/* Service 2 - Pro */}
+            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <Building className="h-10 w-10 text-accent-500" strokeWidth={1.5} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-accent-500 text-center mb-3">Pledgecard Pro</h3>
+              <p className="text-gray-600 text-center text-sm leading-relaxed">
+                Advanced tools designed for NGOs and nonprofits
+              </p>
+            </div>
+
+            {/* Service 3 - CSR */}
+            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <Briefcase className="h-10 w-10 text-gray-600" strokeWidth={1.5} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-600 text-center mb-3">CSR Management</h3>
+              <p className="text-gray-600 text-center text-sm leading-relaxed">
+                Track and manage corporate social responsibility
+              </p>
+            </div>
+
+            {/* Service 4 - Events */}
+            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <Calendar className="h-10 w-10 text-brand-600" strokeWidth={1.5} />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-brand-600 text-center mb-3">Event Fundraising</h3>
+              <p className="text-gray-600 text-center text-sm leading-relaxed">
+                Galas, concerts, and community events
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -437,10 +499,10 @@ export const Home: React.FC = () => {
                   <Sprout className="w-4 h-4" /> Success Story
                 </div>
                 <h2 className="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
-                  "The new borehole changed our lives."
+                  "Our cooperative grew from 20 to 150 women."
                 </h2>
                 <p className="text-brand-100 text-lg leading-relaxed">
-                  Before the campaign, women in Kalangala walked 5km daily for water. Thanks to 450 pledges and donations, the village now has a solar-powered water pump.
+                  The Namayingo Women's Cooperative needed capital to expand their agricultural business. Through Pledgecard Africa, they raised UGX 45M, purchased modern farming equipment, and now supply produce to markets across Uganda and Kenya.
                 </p>
 
                 <div className="h-px bg-brand-800 w-full my-6"></div>
@@ -450,8 +512,8 @@ export const Home: React.FC = () => {
                     <img src="/success-stories/mary_profile.png" alt="User" className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-lg">Mary N.</p>
-                    <p className="text-brand-400 text-sm">Community Leader, Kalangala</p>
+                    <p className="text-white font-bold text-lg">Sarah A.</p>
+                    <p className="text-brand-400 text-sm">Cooperative Chairperson, Namayingo</p>
                   </div>
                 </div>
               </div>
@@ -463,8 +525,8 @@ export const Home: React.FC = () => {
                 {/* Floating Badge */}
                 <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl max-w-xs transform -rotate-2 hover:rotate-0 transition-transform duration-300">
                   <Quote className="w-8 h-8 text-brand-200 absolute top-4 right-4" />
-                  <p className="text-gray-900 font-bold text-2xl font-display mb-1">UGX 12M</p>
-                  <p className="text-gray-500 text-sm font-medium">Raised in just 3 weeks</p>
+                  <p className="text-gray-900 font-bold text-2xl font-display mb-1">UGX 45M</p>
+                  <p className="text-gray-500 text-sm font-medium">Raised in 6 weeks</p>
                 </div>
               </div>
             </div>

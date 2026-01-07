@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Empowering Ugandan communities through transparent, accessible, and secure crowdfunding technology.
+              Bridging the intention-action gap across Africa — democratizing access to financial resources through secure, transparent crowdfunding.
             </p>
             <div className="flex gap-4">
               <SocialIcon href="#" icon={<Facebook size={18} />} />
@@ -102,7 +102,7 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} PledgeCard Uganda. All rights reserved.
+            © {new Date().getFullYear()} Pledgecard Africa. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm font-medium text-gray-500">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
