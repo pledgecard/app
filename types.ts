@@ -25,6 +25,7 @@ export interface User {
   email: string;
   role: UserRole;
   balance: number; // For demo purposes
+  createdAt?: string; // Account creation date from database
 }
 
 export interface Campaign {

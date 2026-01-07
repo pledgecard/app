@@ -46,7 +46,9 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-2">
             <Link to="/campaigns" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/campaigns')}`}>Explore</Link>
             <Link to="/create" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/create')}`}>Start Campaign</Link>
-            <Link to="/dashboard" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/dashboard')}`}>Dashboard</Link>
+            {user && (
+              <Link to="/dashboard" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/dashboard')}`}>Dashboard</Link>
+            )}
             {user?.role === UserRole.ADMIN && (
               <Link to="/admin" className={`px-4 py-2 rounded-full text-sm transition-all ${isActive('/admin')}`}>Admin</Link>
             )}
@@ -116,7 +118,9 @@ export const Navbar: React.FC = () => {
             <div className="px-4 pt-2 pb-6 space-y-2">
               <Link to="/campaigns" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Explore</Link>
               <Link to="/create" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Start Campaign</Link>
-              <Link to="/dashboard" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Dashboard</Link>
+              {user && (
+                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Dashboard</Link>
+              )}
               {user?.role === UserRole.ADMIN && (
                 <Link to="/admin" onClick={() => setIsOpen(false)} className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-700 hover:bg-brand-50 transition-colors">Admin</Link>
               )}

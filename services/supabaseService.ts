@@ -249,7 +249,8 @@ export const SupabaseService = {
             ...data,
             fullName: data.full_name,
             balance: Number(data.balance) || 0,
-            role: data.role || 'USER'
+            role: data.role || 'USER',
+            createdAt: data.created_at
         } as User;
     },
 

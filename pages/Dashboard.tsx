@@ -4,6 +4,7 @@ import { ApiService } from '../services/api';
 import { Donation, Pledge, PledgeStatus, User, Campaign, CampaignStatus } from '../types';
 import { Clock, CheckCircle, TrendingUp, ArrowRight, Plus, Rocket, Hourglass } from 'lucide-react';
 import { MyCampaignCard } from '../components/MyCampaignCard';
+import { calculateAllMetrics, DashboardMetrics } from '../lib/dashboardHelpers';
 
 const SkeletonLoader: React.FC = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-24 animate-pulse">
@@ -32,6 +33,7 @@ export const Dashboard: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [showUpdateNotification, setShowUpdateNotification] = useState(false);
   const [updatedCampaignTitle, setUpdatedCampaignTitle] = useState('');
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,6 +71,12 @@ export const Dashboard: React.FC = () => {
         setPledges(pData);
         setDonations(dData);
         setCampaigns(cData);
+
+        // Calculate dashboard metrics
+        if (currentUser.createdAt && dData && pData) {
+          const calculatedMetrics = calculateAllMetrics(currentUser.createdAt, dData, pData);
+          setMetrics(calculatedMetrics);
+        }
 
       } catch (error: any) {
         console.error('Error fetching dashboard data:', error);
@@ -417,7 +425,17 @@ CREATE POLICY "Users can update own profile." ON public.profiles FOR UPDATE USIN
               </div>
               <div>
                 <p className="font-bold text-gray-900 leading-none">Impact Growth</p>
-                <p className="text-xs text-gray-400 font-medium mt-1">Up 12% this month</p>
+                <p className="text-xs text-gray-400 font-medium mt-1">
+                  {metrics?.monthlyGrowthPercentage !== undefined ? (
+                    metrics.monthlyGrowthPercentage >= 0 ? (
+                      <>Up {metrics.monthlyGrowthPercentage}% this month</>
+                    ) : (
+                      <>Down {Math.abs(metrics.monthlyGrowthPercentage)}% this month</>
+                    )
+                  ) : (
+                    <>--%</>
+                  )}
+                </p>
               </div>
             </div>
           </div>
@@ -596,24 +614,40 @@ CREATE POLICY "Users can update own profile." ON public.profiles FOR UPDATE USIN
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-brand-500"></div>
-                  <p className="text-sm font-medium text-gray-600">You've supported <span className="text-gray-900 font-black">4 different categories</span></p>
+                  <p className="text-sm font-medium text-gray-600">
+                    You've supported <span className="text-gray-900 font-black">{metrics?.uniqueCategories || 0} different categories</span>
+                  </p>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-brand-500"></div>
-                  <p className="text-sm font-medium text-gray-600">Active for <span className="text-gray-900 font-black">12 weeks</span></p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Active for <span className="text-gray-900 font-black">{metrics?.accountAgeWeeks || 1} weeks</span>
+                  </p>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-brand-500"></div>
-                  <p className="text-sm font-medium text-gray-600">Top category: <span className="text-gray-900 font-black">Education</span></p>
+                  <p className="text-sm font-medium text-gray-600">
+                    Top category: <span className="text-gray-900 font-black">{metrics?.topCategory || 'None yet'}</span>
+                  </p>
                 </div>
               </div>
               <div className="mt-8 pt-8 border-t border-brand-100/50">
                 <div className="flex justify-between items-center mb-2">
-                  <p className="text-xs font-black uppercase text-brand-600 tracking-wider">Level 4 Supporter</p>
-                  <p className="text-xs font-bold text-gray-400">75% to Level 5</p>
+                  <p className="text-xs font-black uppercase text-brand-600 tracking-wider">
+                    Level {metrics?.currentLevel || 1} {metrics?.currentLevelName || 'Supporter'}
+                  </p>
+                  <p className="text-xs font-bold text-gray-400">
+                    {metrics?.progressToNextLevel === 100
+                      ? 'Max Level!'
+                      : `${metrics?.progressToNextLevel || 0}% to Level ${metrics?.currentLevel ? metrics.currentLevel + 1 : 2}`
+                    }
+                  </p>
                 </div>
                 <div className="w-full h-2 bg-brand-100 rounded-full overflow-hidden">
-                  <div className="w-3/4 h-full bg-brand-500 rounded-full"></div>
+                  <div
+                    className="h-full bg-brand-500 rounded-full transition-all duration-500"
+                    style={{ width: `${metrics?.progressToNextLevel || 0}%` }}
+                  ></div>
                 </div>
               </div>
             </div>

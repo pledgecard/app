@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Pledge Card Uganda is a crowdfunding platform built with React, TypeScript, and Vite. It allows users to create campaigns, receive instant donations, and collect future pledges with local payment integration (MTN Mobile Money, Airtel Money, VISA). The app uses Supabase for authentication and data persistence.
+Pledgecard Africa is a crowdfunding platform built with React 19, TypeScript, and Vite. It allows users to create campaigns, receive instant donations, and collect future pledges with local payment integration (MTN Mobile Money, Airtel Money, VISA). The app uses Supabase for authentication and data persistence.
 
 ## Development Commands
 
@@ -36,6 +36,7 @@ The app requires environment variables set in `.env` or `.env.local`:
 │   ├── Navbar.tsx         # Navigation with auth state
 │   ├── Footer.tsx
 │   ├── CampaignCard.tsx   # Campaign display card
+│   ├── MyCampaignCard.tsx # User's campaign card with status
 │   ├── ProgressBar.tsx
 │   ├── RichTextEditor.tsx # Content-editable WYSIWYG editor
 │   └── PaymentSimulation.tsx
@@ -47,10 +48,15 @@ The app requires environment variables set in `.env` or `.env.local`:
 │   ├── Dashboard.tsx      # User dashboard (my campaigns, pledges)
 │   ├── CreateCampaign.tsx # Campaign creation
 │   └── AdminDashboard.tsx # Campaign moderation
+├── services/               # API abstraction layer
+│   ├── api.ts             # Service switcher (Mock vs Supabase)
+│   ├── supabaseService.ts # Supabase implementation
+│   └── mockApi.ts         # Mock data for development
 ├── lib/
 │   └── supabase.ts        # Supabase client initialization
 ├── public/                 # Static assets
-│   └── logo.png           # Logo used as favicon
+│   ├── logo.png           # Logo used as favicon
+│   └── hero/              # Hero section images
 ├── types.ts               # TypeScript interfaces/enums
 └── supabase_schema.sql    # Database schema reference
 ```
@@ -68,16 +74,29 @@ The app requires environment variables set in `.env` or `.env.local`:
 Core entities: `User`, `Campaign`, `Pledge`, `Donation`
 Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
 
+**Service Abstraction Pattern**
+- `services/api.ts` acts as a facade that switches between `MockApi` (dev) and `SupabaseService` (production)
+- The switch is controlled by `IS_PRODUCTION` which checks for `VITE_SUPABASE_URL`
+- This allows local development without a Supabase backend
+- All components import from `services/api.ts`, never directly from Supabase
+
 **Database Schema & Triggers**
 - Supabase PostgreSQL with Row Level Security (RLS) enabled
 - Triggers automatically update campaign `raised_amount` and `pledged_amount` when donations/pledges are created
 - Storage bucket `campaign-images` for file uploads with public read access
 - RLS policies: Approved campaigns are public, users can only see their own pledges/donations
+- **Important:** Column naming mismatch - Supabase uses snake_case (`raised_amount`) but TypeScript uses camelCase (`raisedAmount`). The service layer handles this mapping.
+
+**Role-Based Access Control**
+- Navbar shows Admin link only when `user.role === UserRole.ADMIN`
+- Dashboard displays different states based on campaign status (PENDING vs APPROVED/COMPLETED)
+- AdminDashboard provides campaign approval workflow and platform-wide stats
 
 **Rich Text Editor**
 - Custom `contentEditable` div with toolbar buttons using `document.execCommand()`
 - Supports bold, italic, headings (H2, H3), lists, quotes, text alignment, and image upload (base64)
-- Syncs with external value changes via useEffect
+- Syncs with external value changes via useEffect to handle AI-generated content updates
+- Images stored as base64 data URIs in the HTML
 
 **Styling**
 - Tailwind CSS with custom brand colors (`brand`: purple, `accent`: amber)
@@ -88,9 +107,42 @@ Enums: `UserRole`, `CampaignStatus`, `PledgeStatus`
 
 The app uses React hooks (useState, useEffect) and Supabase real-time subscriptions. No global state library (Redux/Context) is implemented yet.
 
+**Real-time Updates:**
+- `ApiService.subscribeToCampaignUpdates()` subscribes to PostgreSQL changes via Supabase
+- Dashboard and Home pages subscribe to campaign updates and show toast notifications
+- AdminDashboard has a "Live Feed" showing recent donations and pledges
+- Always unsubscribe in cleanup functions to avoid memory leaks
+
+**Common Development Patterns:**
+
+**Skeleton Loading:**
+- Use `SkeletonLoader` component (see Dashboard.tsx) for async data loading states
+- Pattern: `if (loading) return <SkeletonLoader />;`
+
+**Database Error Handling:**
+- Dashboard checks for 406/404 errors to detect missing database tables
+- Use retry logic for OAuth session timing: multiple attempts with delays
+- Pattern: `while (!currentUser && retries < maxRetries)`
+
+**Navigation:**
+- `useNavigate()` from `react-router-dom` for programmatic navigation
+- Link components from `react-router-dom` for declarative navigation
+- Auth state changes trigger automatic redirects via `AuthListener`
+
+**Image Handling:**
+- Campaign images uploaded to Supabase Storage bucket `campaign-images`
+- Path format: `campaigns/{userId}/{timestamp}.{ext}`
+- Rich text editor images stored as base64 in HTML content
+- Hero images referenced as `/hero/{filename}.png` from public folder
+
 ## Payment Integration
 
 Currently simulated in `PaymentSimulation.tsx` for MTN, Airtel, and VISA. Real payment gateway integration is pending.
+
+**Donations:**
+- `createDonation()` generates a unique `transaction_id` for each payment
+- Transaction IDs follow format: `TXN-{timestamp}-{random}`
+- Payment methods stored as: 'MTN', 'AIRTEL', 'VISA' (note: differs from UI which uses 'Airtel')
 
 ## Vite Configuration
 
@@ -148,5 +200,23 @@ If you see "Expected a JavaScript module script but got 'application/octet-strea
 - Update Site URL and Redirect URLs in Supabase Dashboard
 - Must match production domain (pledgecard.co)
 
+**Database Setup Errors (406/404):**
+- Dashboard detects missing tables and shows setup instructions with SQL script
+- Error occurs when `profiles` or `campaigns` tables don't exist
+- SQL script in Dashboard handles table creation, RLS policies, and triggers
+
 ### Favicon
 The app uses `/public/logo.png` as the favicon, configured in `index.html`.
+
+### Static Assets
+Hero section images are stored in `/public/hero/`:
+- `medical.png` - Medical campaigns
+- `education.png` - Education campaigns
+- `emergency.png` - Emergency/clean water campaigns
+- `business.png` - Business campaigns
+- `cause.png` - Tech hub campaigns
+- `animals.png` - Wildlife campaigns
+
+Success story images in `/public/success-stories/`:
+- `mary_profile.png` - Profile image
+- `borehole_success.png` - Campaign completion image

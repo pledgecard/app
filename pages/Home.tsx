@@ -36,6 +36,25 @@ const FloatAnimation = () => (
     .animate-spin-slower { animation: spin-slow 120s linear infinite reverse; }
     .animate-blob { animation: blob-bounce 20s infinite ease-in-out alternate; }
     .animate-shimmer { animation: shimmer 3s linear infinite; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .glow-purple:hover { box-shadow: 0 20px 40px -10px rgba(167, 139, 250, 0.2); border-color: rgba(167, 139, 250, 0.4); }
+    .glow-amber:hover { box-shadow: 0 20px 40px -10px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4); }
+    .glow-blue:hover { box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.2); border-color: rgba(56, 189, 248, 0.4); }
+    .glow-rose:hover { box-shadow: 0 20px 40px -10px rgba(251, 113, 133, 0.2); border-color: rgba(251, 113, 133, 0.4); }
+    .african-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
   `}</style>
 );
 
@@ -346,76 +365,101 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block text-brand-600 font-bold tracking-wider uppercase text-sm mb-4">
-              What We Offer
+      {/* Services Overview - Brand-Centric Design with Creative Unsplash Overlay */}
+      <section className="py-32 bg-[#050507] relative overflow-hidden">
+        {/* Background Image Overlay - Creative Unsplash Storytelling */}
+        <div
+          className="absolute inset-0 z-0 opacity-15 mix-blend-screen pointer-events-none grayscale brightness-50"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}
+        ></div>
+
+        {/* Brand Glow Accents (Solid Colors, No Gradients) */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-900/10 rounded-full blur-[120px] mix-blend-screen animate-blob"></div>
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent-900/5 rounded-full blur-[120px] mix-blend-screen animate-blob" style={{ animationDelay: '-10s' }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <span className="inline-block py-1.5 px-5 rounded-full bg-brand-950/40 border border-brand-800/50 text-brand-400 font-bold tracking-widest uppercase text-[10px] mb-6 backdrop-blur-md">
+              The PledgeCard Advantage
             </span>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
-              Beyond Traditional Fundraising
+            <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight">
+              What We Offer
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-              Powerful tools and features designed to transform how Africa gives.
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-regular">
+              Experience a new standard of fundraising with tools designed for high impact, deep transparency, and localized accessibility.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Service 1 - Personal */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <Heart className="h-10 w-10 text-brand-600" strokeWidth={1.5} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-brand-600 text-center mb-3">Personal Fundraising</h3>
-              <p className="text-gray-600 text-center text-sm leading-relaxed">
-                Medical emergencies, education fees, memorials & more
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Heart,
+                title: "Personal Fundraising",
+                desc: "Empower individuals to overcome medical emergencies, education needs, and life's unexpected hurdles.",
+                glowClass: "hover:border-brand-500/50 hover:shadow-[0_20px_40px_-10px_rgba(124,58,237,0.2)]",
+                iconColor: "text-brand-400",
+                iconBg: "bg-brand-500/10",
+                badge: "Popular"
+              },
+              {
+                icon: Building,
+                title: "Pledgecard Pro",
+                desc: "Institutional-grade tools optimized for NGOs to maximize their global reach and donor management.",
+                glowClass: "hover:border-accent-500/50 hover:shadow-[0_20px_40px_-10px_rgba(217,119,6,0.2)]",
+                iconColor: "text-accent-400",
+                iconBg: "bg-accent-500/10",
+                badge: "Enterprise"
+              },
+              {
+                icon: Briefcase,
+                title: "CSR Management",
+                desc: "Sophisticated corporate solutions to align business values with social impact across 8 African markets.",
+                glowClass: "hover:border-brand-500/50 hover:shadow-[0_20px_40px_-10px_rgba(124,58,237,0.2)]",
+                iconColor: "text-brand-400",
+                iconBg: "bg-brand-500/10"
+              },
+              {
+                icon: Calendar,
+                title: "Event Fundraising",
+                desc: "Seamless integration for galas, community concerts, and sporting events with live contribution tracking.",
+                glowClass: "hover:border-accent-500/50 hover:shadow-[0_20px_40px_-10px_rgba(217,119,6,0.2)]",
+                iconColor: "text-accent-400",
+                iconBg: "bg-accent-500/10"
+              }
+            ].map((service, idx) => (
+              <div key={idx} className={`group glass-card ${service.glowClass} p-10 rounded-[2.5rem] flex flex-col items-start h-full relative overflow-hidden transition-all duration-500`}>
+                {/* Visual Accent */}
+                {service.badge && (
+                  <div className="absolute top-6 right-6 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase text-white tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
+                    {service.badge}
+                  </div>
+                )}
 
-            {/* Service 2 - Pro */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <Building className="h-10 w-10 text-accent-500" strokeWidth={1.5} />
+                {/* Icon Container - Pure Brand Colors */}
+                <div className={`relative mb-8 w-16 h-16 flex items-center justify-center rounded-2xl ${service.iconBg} border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}>
+                  <service.icon className={`w-8 h-8 ${service.iconColor} relative z-10`} strokeWidth={1.5} />
                 </div>
-              </div>
-              <h3 className="text-xl font-bold text-accent-500 text-center mb-3">Pledgecard Pro</h3>
-              <p className="text-gray-600 text-center text-sm leading-relaxed">
-                Advanced tools designed for NGOs and nonprofits
-              </p>
-            </div>
 
-            {/* Service 3 - CSR */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <Briefcase className="h-10 w-10 text-gray-600" strokeWidth={1.5} />
-                </div>
+                <h3 className="text-2xl font-bold font-display text-white mb-4 group-hover:text-white transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400 text-[15px] leading-relaxed font-medium">
+                  {service.desc}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-600 text-center mb-3">CSR Management</h3>
-              <p className="text-gray-600 text-center text-sm leading-relaxed">
-                Track and manage corporate social responsibility
-              </p>
-            </div>
-
-            {/* Service 4 - Events */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors duration-200">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <Calendar className="h-10 w-10 text-brand-600" strokeWidth={1.5} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-brand-600 text-center mb-3">Event Fundraising</h3>
-              <p className="text-gray-600 text-center text-sm leading-relaxed">
-                Galas, concerts, and community events
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
+
 
       {/* How It Works */}
       <section className="py-24 bg-gray-50">
