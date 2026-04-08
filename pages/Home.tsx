@@ -168,9 +168,6 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Orbiting Bubbles */}
-
-          {/* Top Left - Medical */}
           <HeroBubble
             category="Medical Care"
             img="/hero/medical.png"
@@ -178,7 +175,6 @@ export const Home: React.FC = () => {
             progress={65}
             delay="0s"
           />
-          {/* Top Right - Education */}
           <HeroBubble
             category="Education"
             img="/hero/education.png"
@@ -186,7 +182,6 @@ export const Home: React.FC = () => {
             progress={80}
             delay="1.5s"
           />
-          {/* Bottom Left - Emergency */}
           <HeroBubble
             category="Clean Water"
             img="/hero/emergency.png"
@@ -194,7 +189,6 @@ export const Home: React.FC = () => {
             progress={45}
             delay="2.5s"
           />
-          {/* Bottom Right - Business */}
           <HeroBubble
             category="Local Market"
             img="/hero/business.png"
@@ -202,8 +196,6 @@ export const Home: React.FC = () => {
             progress={90}
             delay="1s"
           />
-
-          {/* Middle Leftish - Tech Hub */}
           <HeroBubble
             category="Tech Hub"
             img="/hero/cause.png"
@@ -211,7 +203,6 @@ export const Home: React.FC = () => {
             progress={30}
             delay="3.5s"
           />
-          {/* Middle Rightish - Wildlife */}
           <HeroBubble
             category="Wildlife"
             img="/hero/animals.png"
@@ -221,14 +212,12 @@ export const Home: React.FC = () => {
           />
         </div>
 
-        {/* Bottom Stats Text */}
         <div className="max-w-6xl mx-auto px-6 mt-16 md:mt-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative pl-6 md:pl-0">
               <h3 className="text-3xl font-display font-bold text-gray-900 leading-tight">
                 Over <span className="text-brand-600 bg-brand-50 px-2 rounded-lg">UGX 10 million</span> raised across 8 African countries.*
               </h3>
-              {/* Decorative line */}
               <div className="absolute left-0 md:-left-6 top-2 bottom-2 w-1.5 bg-gradient-to-b from-brand-300 to-brand-500 rounded-full"></div>
             </div>
             <div>
@@ -239,7 +228,6 @@ export const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* District Marquee */}
         <div className="mt-20 border-y border-gray-100 bg-white/50 backdrop-blur-sm py-8 overflow-hidden">
           <div className="flex whitespace-nowrap animate-marquee items-center gap-12 text-gray-400 font-bold tracking-widest uppercase text-sm">
             {['Kampala', 'Entebbe', 'Jinja', 'Mbarara', 'Gulu', 'Arua', 'Mbale', 'Masaka', 'Lira', 'Hoima', 'Fort Portal', 'Wakiso', 'Mukono', 'Iganga', 'Tororo', 'Soroti', 'Kampala', 'Entebbe', 'Jinja', 'Mbarara', 'Gulu', 'Arua', 'Mbale', 'Masaka'].map((district, i) => (
@@ -250,14 +238,10 @@ export const Home: React.FC = () => {
             ))}
           </div>
         </div>
-
-
       </section>
-
 
       {/* Impact Stats */}
       <section className="relative py-20 bg-brand-900 overflow-hidden">
-        {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-[-50%] left-[-10%] w-[50%] h-[150%] bg-brand-800/30 rounded-full blur-3xl transform rotate-12 mix-blend-screen"></div>
           <div className="absolute bottom-[-50%] right-[-10%] w-[50%] h-[150%] bg-brand-950/50 rounded-full blur-3xl transform -rotate-12"></div>
@@ -265,66 +249,43 @@ export const Home: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-
-            {/* Stat 1 */}
             <div className="flex flex-col items-center text-center group">
               <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
                 <TrendingUp className="w-8 h-8" />
               </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                10M+
-              </h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                UGX Raised
-              </p>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">10M+</h3>
+              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">UGX Raised</p>
             </div>
 
-            {/* Stat 2 */}
             <div className="flex flex-col items-center text-center group">
               <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
                 <Heart className="w-8 h-8" />
               </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                15k+
-              </h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                Active Users
-              </p>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">15k+</h3>
+              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">Active Users</p>
             </div>
 
-            {/* Stat 3 */}
             <div className="flex flex-col items-center text-center group">
               <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
                 <ShieldCheck className="w-8 h-8" />
               </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                200+
-              </h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                Verified Campaigns
-              </p>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">200+</h3>
+              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">Verified Campaigns</p>
             </div>
 
-            {/* Stat 4 */}
             <div className="flex flex-col items-center text-center group">
               <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
                 <Users className="w-8 h-8" />
               </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
-                8
-              </h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">
-                African Countries
-              </p>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">8</h3>
+              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">African Countries</p>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* Why PledgeCard Section - Creative 3-Column Redesign */}
+      {/* Why PledgeCard Section */}
       <section className="py-24 bg-white relative overflow-hidden">
-        {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-50/50 blur-[120px] pointer-events-none -z-10"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-accent-50/50 blur-[120px] pointer-events-none -z-10"></div>
 
@@ -339,7 +300,6 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Instant Mobile Money */}
             <div className="creative-card group">
               <div className="glow-border"></div>
               <div className="relative z-10">
@@ -363,7 +323,6 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Social Pledges */}
             <div className="creative-card group">
               <div className="glow-border"></div>
               <div className="relative z-10">
@@ -383,7 +342,6 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* 100% Verified */}
             <div className="creative-card group">
               <div className="glow-border"></div>
               <div className="relative z-10">
@@ -405,10 +363,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-
-      {/* Services Overview - Brand-Centric Design with Creative Unsplash Overlay */}
+      {/* Services Overview */}
       <section className="py-32 bg-[#050507] relative overflow-hidden">
-        {/* Background Image Overlay - Creative Unsplash Storytelling */}
         <div
           className="absolute inset-0 z-0 opacity-15 mix-blend-screen pointer-events-none grayscale brightness-50"
           style={{
@@ -419,20 +375,12 @@ export const Home: React.FC = () => {
           }}
         ></div>
 
-        {/* Brand Glow Accents (Solid Colors, No Gradients) */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-900/10 rounded-full blur-[120px] mix-blend-screen animate-blob"></div>
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent-900/5 rounded-full blur-[120px] mix-blend-screen animate-blob" style={{ animationDelay: '-10s' }}></div>
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
             <span className="inline-block py-1.5 px-5 rounded-full bg-brand-950/40 border border-brand-800/50 text-brand-400 font-bold tracking-widest uppercase text-[10px] mb-6 backdrop-blur-md">
               The PledgeCard Advantage
             </span>
-            <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight">
-              What We Offer
-            </h2>
+            <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight">What We Offer</h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-regular">
               Experience a new standard of fundraising with tools designed for high impact, deep transparency, and localized accessibility.
             </p>
@@ -440,78 +388,35 @@ export const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              {
-                icon: Heart,
-                title: "Personal Fundraising",
-                desc: "Empower individuals to overcome medical emergencies, education needs, and life's unexpected hurdles.",
-                glowClass: "hover:border-brand-500/50 hover:shadow-[0_20px_40px_-10px_rgba(124,58,237,0.2)]",
-                iconColor: "text-brand-400",
-                iconBg: "bg-brand-500/10",
-                badge: "Popular"
-              },
-              {
-                icon: Building,
-                title: "Pledgecard Pro",
-                desc: "Institutional-grade tools optimized for NGOs to maximize their global reach and donor management.",
-                glowClass: "hover:border-accent-500/50 hover:shadow-[0_20px_40px_-10px_rgba(217,119,6,0.2)]",
-                iconColor: "text-accent-400",
-                iconBg: "bg-accent-500/10",
-                badge: "Enterprise"
-              },
-              {
-                icon: Briefcase,
-                title: "CSR Management",
-                desc: "Sophisticated corporate solutions to align business values with social impact across 8 African markets.",
-                glowClass: "hover:border-brand-500/50 hover:shadow-[0_20px_40px_-10px_rgba(124,58,237,0.2)]",
-                iconColor: "text-brand-400",
-                iconBg: "bg-brand-500/10"
-              },
-              {
-                icon: Calendar,
-                title: "Event Fundraising",
-                desc: "Seamless integration for galas, community concerts, and sporting events with live contribution tracking.",
-                glowClass: "hover:border-accent-500/50 hover:shadow-[0_20px_40px_-10px_rgba(217,119,6,0.2)]",
-                iconColor: "text-accent-400",
-                iconBg: "bg-accent-500/10"
-              }
+              { icon: Heart, title: "Personal Fundraising", desc: "Empower individuals to overcome medical emergencies and education needs.", glowClass: "glow-purple", iconColor: "text-brand-400", iconBg: "bg-brand-500/10", badge: "Popular" },
+              { icon: Building, title: "Pledgecard Pro", desc: "Institutional-grade tools optimized for NGOs to maximize their global reach.", glowClass: "glow-amber", iconColor: "text-accent-400", iconBg: "bg-accent-500/10", badge: "Enterprise" },
+              { icon: Briefcase, title: "CSR Management", desc: "Sophisticated corporate solutions to align business values with social impact.", glowClass: "glow-blue", iconColor: "text-brand-400", iconBg: "bg-brand-500/10" },
+              { icon: Calendar, title: "Event Fundraising", desc: "Seamless integration for galas and sporting events with live tracking.", glowClass: "glow-rose", iconColor: "text-accent-400", iconBg: "bg-accent-500/10" }
             ].map((service, idx) => (
               <div key={idx} className={`group glass-card ${service.glowClass} p-10 rounded-[2.5rem] flex flex-col items-start h-full relative overflow-hidden transition-all duration-500`}>
-                {/* Visual Accent */}
                 {service.badge && (
                   <div className="absolute top-6 right-6 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase text-white tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
                     {service.badge}
                   </div>
                 )}
-
-                {/* Icon Container - Pure Brand Colors */}
                 <div className={`relative mb-8 w-16 h-16 flex items-center justify-center rounded-2xl ${service.iconBg} border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}>
                   <service.icon className={`w-8 h-8 ${service.iconColor} relative z-10`} strokeWidth={1.5} />
                 </div>
-
-                <h3 className="text-2xl font-bold font-display text-white mb-4 group-hover:text-white transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-400 text-[15px] leading-relaxed font-medium">
-                  {service.desc}
-                </p>
+                <h3 className="text-2xl font-bold font-display text-white mb-4 transition-colors">{service.title}</h3>
+                <p className="text-gray-400 text-[15px] leading-relaxed font-medium">{service.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-
-
       {/* How It Works */}
       <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <span className="text-brand-600 font-bold tracking-wider uppercase text-sm">Simple Process</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2">Make an Impact in 3 Steps</h2>
-          </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-16">Make an Impact in 3 Steps</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-            {/* Connector Line (Desktop) */}
             <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gray-200 -z-10 border-t-2 border-dashed border-gray-300"></div>
 
             <div className="flex flex-col items-center text-center group">
@@ -537,6 +442,12 @@ export const Home: React.FC = () => {
               <h3 className="text-xl font-bold font-display mb-3 text-gray-900">3. See the Change</h3>
               <p className="text-gray-500 leading-relaxed max-w-xs">Get updates and photos when the project is completed.</p>
             </div>
+          </div>
+          
+          <div className="mt-16">
+            <Link to="/how-it-works" className="inline-flex items-center gap-2 text-brand-600 font-bold hover:gap-3 transition-all">
+               Detailed breakdown of how it works <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -574,7 +485,6 @@ export const Home: React.FC = () => {
       <section className="py-24 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-brand-900 rounded-[3rem] p-8 md:p-16 relative shadow-2xl overflow-hidden">
-            {/* Decorative circles */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-800 rounded-full -mr-16 -mt-16 opacity-50 blur-2xl"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-800 rounded-full -ml-16 -mb-16 opacity-50 blur-2xl"></div>
 
@@ -587,7 +497,7 @@ export const Home: React.FC = () => {
                   "Our cooperative grew from 20 to 150 women."
                 </h2>
                 <p className="text-brand-100 text-lg leading-relaxed">
-                  The Namayingo Women's Cooperative needed capital to expand their agricultural business. Through Pledgecard Africa, they raised UGX 45M, purchased modern farming equipment, and now supply produce to markets across Uganda and Kenya.
+                  The Namayingo Women's Cooperative raised UGX 45M, purchased modern farming equipment, and now supply produce to markets across Uganda and Kenya.
                 </p>
 
                 <div className="h-px bg-brand-800 w-full my-6"></div>
@@ -607,7 +517,6 @@ export const Home: React.FC = () => {
                   <img src="/success-stories/borehole_success.png" alt="Success Story" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </div>
-                {/* Floating Badge */}
                 <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl max-w-xs transform -rotate-2 hover:rotate-0 transition-transform duration-300">
                   <Quote className="w-8 h-8 text-brand-200 absolute top-4 right-4" />
                   <p className="text-gray-900 font-bold text-2xl font-display mb-1">UGX 45M</p>
@@ -615,6 +524,11 @@ export const Home: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-16 text-center">
+            <Link to="/stories" className="inline-flex items-center gap-2 text-gray-500 font-bold hover:text-brand-600 transition-colors">
+               Explore more success stories <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

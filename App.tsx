@@ -10,6 +10,8 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { Campaigns } from './pages/Campaigns';
 import { Auth } from './pages/Auth';
 import { Footer } from './components/Footer';
+import { SuccessStories } from './pages/SuccessStories';
+import { HowItWorks } from './pages/HowItWorks';
 
 const AuthListener: React.FC = () => {
   const navigate = useNavigate();
@@ -98,6 +100,8 @@ const App: React.FC = () => {
             <Route path="/create" element={<CreateCampaign />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/login" element={<Auth />} />
+            <Route path="/stories" element={<SuccessStories />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
