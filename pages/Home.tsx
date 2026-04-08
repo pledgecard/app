@@ -303,13 +303,9 @@ export const Home: React.FC = () => {
             <div className="creative-card group">
               <div className="glow-border"></div>
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center mb-8">
                   <div className="w-14 h-14 rounded-2xl bg-accent-100 text-accent-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
                     <Zap className="w-7 h-7" />
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 flex items-center gap-2">
-                    <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Instant</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">Instant Mobile Money</h3>

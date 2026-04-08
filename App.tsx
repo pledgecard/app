@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from './lib/supabase';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
@@ -12,6 +12,14 @@ import { Auth } from './pages/Auth';
 import { Footer } from './components/Footer';
 import { SuccessStories } from './pages/SuccessStories';
 import { HowItWorks } from './pages/HowItWorks';
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+};
 
 const AuthListener: React.FC = () => {
   const navigate = useNavigate();
@@ -88,6 +96,7 @@ const AuthListener: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <AuthListener />
       <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
         <Navbar />
