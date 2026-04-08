@@ -285,18 +285,52 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Why PledgeCard Section — Bento Editorial Layout */}
-      <section className="py-28 bg-[#f8f8fc] relative overflow-hidden">
-        {/* Subtle dot grid background */}
-        <div className="absolute inset-0 bg-dots opacity-40 pointer-events-none"></div>
+      <section className="py-28 bg-[#0d0d14] relative overflow-hidden">
+        
+        {/* === BACKGROUND IMAGE LAYERS === */}
 
+        {/* Base photo — African community / market scene */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=2072&auto=format&fit=crop')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 30%',
+          }}
+        ></div>
+
+        {/* Soft grain / noise overlay for texture */}
+        <div
+          className="absolute inset-0 z-[1] opacity-[0.04] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+            backgroundRepeat: 'repeat',
+            backgroundSize: '128px',
+          }}
+        ></div>
+
+        {/* Dark gradient overlay — bottom-heavy so content remains readable */}
+        <div className="absolute inset-0 z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(165deg, rgba(13,13,20,0.88) 0%, rgba(13,13,20,0.75) 45%, rgba(13,13,20,0.96) 100%)' }}
+        ></div>
+
+        {/* Brand colour split — left violet bleed */}
+        <div className="absolute top-0 left-0 w-1/3 h-full z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to right, rgba(109,40,217,0.18), transparent)' }}
+        ></div>
+
+        {/* Accent amber glow — top-right corner */}
+        <div className="absolute -top-24 right-0 w-96 h-96 rounded-full blur-[140px] z-[2] pointer-events-none bg-accent-500/20"></div>
+
+        {/* === CONTENT === */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* Section Label + Heading */}
           <div className="max-w-2xl mb-16">
-            <span className="inline-block text-[11px] font-black uppercase tracking-[0.2em] text-brand-600 mb-5">Why PledgeCard?</span>
-            <h2 className="text-5xl md:text-6xl font-display font-black text-gray-900 leading-[1.05] tracking-tight">
+            <span className="inline-block text-[11px] font-black uppercase tracking-[0.2em] text-accent-400 mb-5 opacity-90">Why PledgeCard?</span>
+            <h2 className="text-5xl md:text-6xl font-display font-black text-white leading-[1.05] tracking-tight">
               Built for Africa.<br />
-              <span className="text-brand-600">Trusted by thousands.</span>
+              <span className="text-brand-300">Trusted by thousands.</span>
             </h2>
           </div>
 
@@ -333,20 +367,22 @@ export const Home: React.FC = () => {
             {/* Right Column — 2 stacked cards */}
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              {/* Social Pledges */}
-              <div className="bg-white rounded-[2.5rem] p-9 border border-gray-100 flex flex-col justify-between group hover:border-brand-200 hover:shadow-xl hover:shadow-brand-100/40 transition-all duration-500 min-h-[200px]">
+              {/* Social Pledges — glass card */}
+              <div className="rounded-[2.5rem] p-9 flex flex-col justify-between group hover:border-white/20 transition-all duration-500 min-h-[200px] relative overflow-hidden"
+                style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)' }}
+              >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-brand-400/20 border border-brand-300/20 text-brand-300 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <Users className="w-6 h-6" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-display font-black text-gray-900 mb-3 tracking-tight">Social Pledges</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">Social Pledges</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
                     Commit now, fulfill later. Automated reminders keep everyone accountable without the awkward follow-ups.
                   </p>
                 </div>
-                <div className="flex items-center gap-2 mt-6 pt-5 border-t border-gray-50">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Smart Reminders Active</span>
+                <div className="flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                  <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Smart Reminders Active</span>
                 </div>
               </div>
 
@@ -367,17 +403,19 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              {/* Full-width stat bar */}
-              <div className="md:col-span-2 bg-white rounded-[2.5rem] px-10 py-7 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+              {/* Full-width stat bar — glass */}
+              <div className="md:col-span-2 rounded-[2.5rem] px-10 py-7 flex flex-col md:flex-row items-center justify-between gap-6"
+                style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)' }}
+              >
                 {[
-                  { value: '10M+', label: 'UGX Raised', color: 'text-brand-600' },
-                  { value: '200+', label: 'Verified Campaigns', color: 'text-gray-900' },
-                  { value: '15k+', label: 'Active Supporters', color: 'text-gray-900' },
-                  { value: '8', label: 'African Countries', color: 'text-gray-900' },
+                  { value: '10M+', label: 'UGX Raised', color: 'text-accent-400' },
+                  { value: '200+', label: 'Verified Campaigns', color: 'text-white' },
+                  { value: '15k+', label: 'Active Supporters', color: 'text-white' },
+                  { value: '8', label: 'African Countries', color: 'text-white' },
                 ].map((stat, i) => (
-                  <div key={i} className={`text-center ${i !== 0 ? 'md:border-l md:border-gray-100 md:pl-8' : ''}`}>
+                  <div key={i} className={`text-center ${i !== 0 ? 'md:border-l md:border-white/10 md:pl-8' : ''}`}>
                     <p className={`text-3xl font-display font-black tracking-tight ${stat.color}`}>{stat.value}</p>
-                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">{stat.label}</p>
+                    <p className="text-[11px] font-bold text-white/30 uppercase tracking-widest mt-1">{stat.label}</p>
                   </div>
                 ))}
               </div>
