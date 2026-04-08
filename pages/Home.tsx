@@ -134,14 +134,16 @@ export const Home: React.FC = () => {
       <FloatAnimation />
 
       {/* Hero Section */}
-      <section className="relative bg-white pt-24 pb-32 overflow-hidden border-b border-gray-100">
+      <section className="relative bg-mesh pt-24 pb-32 overflow-hidden border-b border-gray-100">
 
         {/* Animated Background Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-brand-100/40 via-purple-50/30 to-transparent rounded-full blur-[80px] animate-blob pointer-events-none -z-10"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-100/10 blur-[120px] pointer-events-none -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-full bg-accent-100/10 blur-[120px] pointer-events-none -z-10"></div>
 
-        {/* Orbit Lines */}
-        <div className="absolute top-1/2 left-1/2 w-[650px] h-[650px] rounded-full border border-dashed border-brand-100/60 pointer-events-none hidden lg:block animate-spin-slow"></div>
-        <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] rounded-full border border-dashed border-gray-100/60 pointer-events-none hidden lg:block animate-spin-slower"></div>
+        {/* Orbit Lines - more subtle */}
+        <div className="absolute top-1/2 left-1/2 w-[650px] h-[650px] rounded-full border border-brand-200/20 pointer-events-none hidden lg:block animate-spin-slow"></div>
+        <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] rounded-full border border-gray-200/20 pointer-events-none hidden lg:block animate-spin-slower"></div>
+
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto pt-10 pb-10">
@@ -151,7 +153,7 @@ export const Home: React.FC = () => {
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold text-gray-900 mb-10 leading-[0.95] tracking-tight">
               Empowering <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700">
+              <span className="text-gradient-premium">
                 Africans
               </span> <br />
               fundraise
@@ -237,7 +239,21 @@ export const Home: React.FC = () => {
           </div>
         </div>
 
+        {/* District Marquee */}
+        <div className="mt-20 border-y border-gray-100 bg-white/50 backdrop-blur-sm py-8 overflow-hidden">
+          <div className="flex whitespace-nowrap animate-marquee items-center gap-12 text-gray-400 font-bold tracking-widest uppercase text-sm">
+            {['Kampala', 'Entebbe', 'Jinja', 'Mbarara', 'Gulu', 'Arua', 'Mbale', 'Masaka', 'Lira', 'Hoima', 'Fort Portal', 'Wakiso', 'Mukono', 'Iganga', 'Tororo', 'Soroti', 'Kampala', 'Entebbe', 'Jinja', 'Mbarara', 'Gulu', 'Arua', 'Mbale', 'Masaka'].map((district, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <span className="w-2 h-2 rounded-full bg-brand-500"></span>
+                {district}
+              </div>
+            ))}
+          </div>
+        </div>
+
+
       </section>
+
 
       {/* Impact Stats */}
       <section className="relative py-20 bg-brand-900 overflow-hidden">
@@ -306,64 +322,89 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section - Redesigned */}
+      {/* Why PledgeCard Section - Creative 3-Column Redesign */}
       <section className="py-24 bg-white relative overflow-hidden">
-        {/* Decorative blobs */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-50 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-accent-50 rounded-full blur-3xl opacity-50"></div>
+        {/* Background Gradients */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-50/50 blur-[120px] pointer-events-none -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-full bg-accent-50/50 blur-[120px] pointer-events-none -z-10"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight">
               Why <span className="text-brand-600">PledgeCard?</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-              We bridge the gap between intention and action with technology built for the African context — serving 8 countries with localized payment integrations.
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              We combine radical transparency with localized technology to bridge the gap between intention and action.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Zap,
-                title: "Instant Mobile Money",
-                desc: "Seamless integration with MTN & Airtel allows your donations to reach beneficiaries in seconds, not days.",
-                color: "bg-accent-50 text-accent-600"
-              },
-              {
-                icon: Users,
-                title: "Social Pledges",
-                desc: "Not ready to pay? Make a commitment now and we'll send you friendly reminders to fulfill your promise later.",
-                color: "bg-brand-50 text-brand-600"
-              },
-              {
-                icon: ShieldCheck,
-                title: "100% Verified",
-                desc: "Every campaign is vetted by our ground team to ensure your money goes to the right place, every time.",
-                color: "bg-brand-50 text-brand-600"
-              }
-            ].map((feature, idx) => (
-              <div key={idx} className="group relative p-8 rounded-[2.5rem] bg-white border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                {/* Hover Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                <div className="relative z-10">
-                  <div className={`w-20 h-20 rounded-3xl ${feature.color} flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500 rotate-3 group-hover:rotate-0`}>
-                    <feature.icon className="h-10 w-10" strokeWidth={1.5} />
+            {/* Instant Mobile Money */}
+            <div className="creative-card group">
+              <div className="glow-border"></div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="w-14 h-14 rounded-2xl bg-accent-100 text-accent-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
+                    <Zap className="w-7 h-7" />
                   </div>
-
-                  <h3 className="text-2xl font-bold text-gray-900 font-display mb-4">{feature.title}</h3>
-                  <p className="text-gray-500 leading-relaxed text-lg mb-6">{feature.desc}</p>
-
-                  <div className="flex items-center text-sm font-bold uppercase tracking-wider text-gray-300 group-hover:text-brand-600 transition-colors">
-                    Learn more <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  <div className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Instant</span>
                   </div>
                 </div>
+                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">Instant Mobile Money</h3>
+                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
+                  Direct MTN & Airtel integration means your contribution reaches the beneficiary's wallet in real-time — secure and localized.
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
+                   <div className="px-2 py-1 bg-gray-50 rounded text-[9px] font-black text-gray-400">MTN MOMO</div>
+                   <div className="px-2 py-1 bg-gray-50 rounded text-[9px] font-black text-gray-400">AIRTEL MONEY</div>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Social Pledges */}
+            <div className="creative-card group">
+              <div className="glow-border"></div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
+                    <Users className="w-7 h-7" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">Social Pledges</h3>
+                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
+                  Commit now, fulfill later. Our automated platform handles the reminders so you can focus on making a difference when you're ready.
+                </p>
+                <div className="flex items-center gap-2 pt-4 border-t border-gray-50">
+                  <div className="w-2 h-2 rounded-full bg-brand-500"></div>
+                  <span className="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Smart Reminders Active</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 100% Verified */}
+            <div className="creative-card group">
+              <div className="glow-border"></div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
+                    <ShieldCheck className="w-7 h-7" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">100% Verified</h3>
+                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
+                  Every campaign is vetted by our local ground team. We ensure your heart reaches the right home with 100% transparency.
+                </p>
+                <div className="flex items-center gap-2 pt-4 border-t border-gray-50 italic">
+                  <span className="text-[10px] font-black text-gray-300 uppercase tracking-tighter">Vetted by ground teams</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Services Overview - Brand-Centric Design with Creative Unsplash Overlay */}
       <section className="py-32 bg-[#050507] relative overflow-hidden">

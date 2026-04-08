@@ -19,7 +19,7 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({ campaign }) => {
 
   return (
     <Link to={`/campaign/${campaign.id}`} className="block group h-full">
-      <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col transform hover:-translate-y-1">
+      <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 h-full flex flex-col hover-lift">
         <div className="relative h-56 overflow-hidden">
           <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors z-10"></div>
           <img
