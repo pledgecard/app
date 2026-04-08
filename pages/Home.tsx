@@ -284,77 +284,105 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Why PledgeCard Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-50/50 blur-[120px] pointer-events-none -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-full bg-accent-50/50 blur-[120px] pointer-events-none -z-10"></div>
+      {/* Why PledgeCard Section — Bento Editorial Layout */}
+      <section className="py-28 bg-[#f8f8fc] relative overflow-hidden">
+        {/* Subtle dot grid background */}
+        <div className="absolute inset-0 bg-dots opacity-40 pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight">
-              Why <span className="text-brand-600">PledgeCard?</span>
+
+          {/* Section Label + Heading */}
+          <div className="max-w-2xl mb-16">
+            <span className="inline-block text-[11px] font-black uppercase tracking-[0.2em] text-brand-600 mb-5">Why PledgeCard?</span>
+            <h2 className="text-5xl md:text-6xl font-display font-black text-gray-900 leading-[1.05] tracking-tight">
+              Built for Africa.<br />
+              <span className="text-brand-600">Trusted by thousands.</span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              We combine radical transparency with localized technology to bridge the gap between intention and action.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="creative-card group">
-              <div className="glow-border"></div>
-              <div className="relative z-10">
-                <div className="flex items-center mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-accent-100 text-accent-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
-                    <Zap className="w-7 h-7" />
-                  </div>
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            {/* Left Hero Card — Instant Mobile Money */}
+            <div className="lg:col-span-5 bg-gray-900 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
+              {/* Decorative glow */}
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-accent-500/20 border border-accent-400/30 text-accent-400 flex items-center justify-center mb-10">
+                  <Zap className="w-7 h-7" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">Instant Mobile Money</h3>
-                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
-                  Direct MTN & Airtel integration means your contribution reaches the beneficiary's wallet in real-time — secure and localized.
+                <h3 className="text-3xl font-display font-black text-white mb-4 tracking-tight leading-tight">
+                  Instant Mobile<br />Money Payments
+                </h3>
+                <p className="text-gray-400 leading-relaxed text-[15px] max-w-xs">
+                  Direct MTN & Airtel integration. Contributions reach the beneficiary's wallet in real-time — no bank account needed.
                 </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
-                   <div className="px-2 py-1 bg-gray-50 rounded text-[9px] font-black text-gray-400">MTN MOMO</div>
-                   <div className="px-2 py-1 bg-gray-50 rounded text-[9px] font-black text-gray-400">AIRTEL MONEY</div>
+              </div>
+
+              <div className="flex items-center gap-3 mt-10">
+                <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">MTN MoMo</div>
+                <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">Airtel Money</div>
+                <div className="ml-auto w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center shadow-lg shadow-accent-500/30 group-hover:scale-110 transition-transform">
+                  <Zap className="w-4 h-4 text-white" />
                 </div>
               </div>
             </div>
 
-            <div className="creative-card group">
-              <div className="glow-border"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
-                    <Users className="w-7 h-7" />
+            {/* Right Column — 2 stacked cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              {/* Social Pledges */}
+              <div className="bg-white rounded-[2.5rem] p-9 border border-gray-100 flex flex-col justify-between group hover:border-brand-200 hover:shadow-xl hover:shadow-brand-100/40 transition-all duration-500 min-h-[200px]">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="w-6 h-6" strokeWidth={1.5} />
                   </div>
+                  <h3 className="text-xl font-display font-black text-gray-900 mb-3 tracking-tight">Social Pledges</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Commit now, fulfill later. Automated reminders keep everyone accountable without the awkward follow-ups.
+                  </p>
                 </div>
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">Social Pledges</h3>
-                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
-                  Commit now, fulfill later. Our automated platform handles the reminders so you can focus on making a difference when you're ready.
-                </p>
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-50">
-                  <div className="w-2 h-2 rounded-full bg-brand-500"></div>
-                  <span className="text-[10px] font-bold text-brand-600 uppercase tracking-widest">Smart Reminders Active</span>
+                <div className="flex items-center gap-2 mt-6 pt-5 border-t border-gray-50">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Smart Reminders Active</span>
                 </div>
+              </div>
+
+              {/* 100% Verified */}
+              <div className="bg-brand-600 rounded-[2.5rem] p-9 flex flex-col justify-between group hover:bg-brand-700 transition-all duration-500 min-h-[200px] relative overflow-hidden">
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500 rounded-full blur-2xl opacity-50 pointer-events-none"></div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">100% Verified</h3>
+                  <p className="text-brand-100/80 text-sm leading-relaxed">
+                    Every campaign is vetted by our on-the-ground teams across Africa before going live.
+                  </p>
+                </div>
+                <div className="relative z-10 flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
+                  <span className="text-[10px] font-black text-brand-200 uppercase tracking-widest">Vetted by ground teams</span>
+                </div>
+              </div>
+
+              {/* Full-width stat bar */}
+              <div className="md:col-span-2 bg-white rounded-[2.5rem] px-10 py-7 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                {[
+                  { value: '10M+', label: 'UGX Raised', color: 'text-brand-600' },
+                  { value: '200+', label: 'Verified Campaigns', color: 'text-gray-900' },
+                  { value: '15k+', label: 'Active Supporters', color: 'text-gray-900' },
+                  { value: '8', label: 'African Countries', color: 'text-gray-900' },
+                ].map((stat, i) => (
+                  <div key={i} className={`text-center ${i !== 0 ? 'md:border-l md:border-gray-100 md:pl-8' : ''}`}>
+                    <p className={`text-3xl font-display font-black tracking-tight ${stat.color}`}>{stat.value}</p>
+                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="creative-card group">
-              <div className="glow-border"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
-                    <ShieldCheck className="w-7 h-7" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brand-700 transition-colors">100% Verified</h3>
-                <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
-                  Every campaign is vetted by our local ground team. We ensure your heart reaches the right home with 100% transparency.
-                </p>
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-50 italic">
-                  <span className="text-[10px] font-black text-gray-300 uppercase tracking-tighter">Vetted by ground teams</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
