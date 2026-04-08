@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { CampaignCard } from '../components/CampaignCard';
 import { Campaign } from '../types';
 import { ApiService } from '../services/api';
 import { ArrowRight, ShieldCheck, Zap, Users, Heart, TrendingUp, CheckCircle2, Sprout, Quote, ArrowUpRight, Building, Briefcase, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useScrollAnimation, staggerDelay } from '../lib/useScrollAnimation';
 
 const FloatAnimation = () => (
   <style>{`
@@ -98,6 +99,25 @@ const HeroBubble = ({ img, category, position, delay, progress }: { img: string,
     </Link>
   </div>
 );
+
+// ─── Scroll reveal wrapper ────────────────────────────────────────────────────
+const Reveal: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  animation?: string;
+  delay?: string;
+  threshold?: number;
+}> = ({ children, className = '', animation = 'reveal-up', delay = '', threshold = 0.15 }) => {
+  const { ref, isVisible } = useScrollAnimation({ threshold });
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`reveal ${animation} ${delay} ${isVisible ? 'visible' : ''} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
 
 export const Home: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -249,37 +269,22 @@ export const Home: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            <div className="flex flex-col items-center text-center group">
-              <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
-                <TrendingUp className="w-8 h-8" />
-              </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">10M+</h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">UGX Raised</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center group">
-              <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
-                <Heart className="w-8 h-8" />
-              </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">15k+</h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">Active Users</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center group">
-              <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
-                <ShieldCheck className="w-8 h-8" />
-              </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">200+</h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">Verified Campaigns</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center group">
-              <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
-                <Users className="w-8 h-8" />
-              </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">8</h3>
-              <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">African Countries</p>
-            </div>
+            {[
+              { icon: TrendingUp, val: "10M+", label: "UGX Raised" },
+              { icon: Heart, val: "15k+", label: "Active Users" },
+              { icon: ShieldCheck, val: "200+", label: "Verified Campaigns" },
+              { icon: Users, val: "8", label: "African Countries" }
+            ].map((stat, i) => (
+              <Reveal key={i} animation="reveal-pop" delay={`delay-${i * 100}`}>
+                <div className="flex flex-col items-center text-center group">
+                  <div className="mb-6 p-4 bg-brand-800/40 rounded-2xl border border-brand-700/50 text-brand-300 backdrop-blur-sm shadow-inner group-hover:scale-110 group-hover:bg-brand-700/50 transition-all duration-300">
+                    <stat.icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">{stat.val}</h3>
+                  <p className="text-brand-200/80 text-sm font-bold uppercase tracking-widest">{stat.label}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -326,99 +331,107 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* Section Label + Heading */}
-          <div className="max-w-2xl mb-16">
+          <Reveal animation="reveal-left" className="max-w-2xl mb-16">
             <span className="inline-block text-[11px] font-black uppercase tracking-[0.2em] text-accent-400 mb-5 opacity-90">Why PledgeCard?</span>
             <h2 className="text-5xl md:text-6xl font-display font-black text-white leading-[1.05] tracking-tight">
               Built for Africa.<br />
               <span className="text-brand-300">Trusted by thousands.</span>
             </h2>
-          </div>
+          </Reveal>
 
           {/* Bento Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
             {/* Left Hero Card — Instant Mobile Money */}
-            <div className="lg:col-span-5 bg-gray-900 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
-              {/* Decorative glow */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <Reveal animation="reveal-left" className="lg:col-span-5 h-full">
+              <div className="bg-gray-900 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col justify-between h-full min-h-[420px] group">
+                {/* Decorative glow */}
+                <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent-500/20 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-              <div>
-                <div className="w-14 h-14 rounded-2xl bg-accent-500/20 border border-accent-400/30 text-accent-400 flex items-center justify-center mb-10">
-                  <Zap className="w-7 h-7" strokeWidth={1.5} />
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-accent-500/20 border border-accent-400/30 text-accent-400 flex items-center justify-center mb-10">
+                    <Zap className="w-7 h-7" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-3xl font-display font-black text-white mb-4 tracking-tight leading-tight">
+                    Instant Mobile<br />Money Payments
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed text-[15px] max-w-xs">
+                    Direct MTN & Airtel integration. Contributions reach the beneficiary's wallet in real-time — no bank account needed.
+                  </p>
                 </div>
-                <h3 className="text-3xl font-display font-black text-white mb-4 tracking-tight leading-tight">
-                  Instant Mobile<br />Money Payments
-                </h3>
-                <p className="text-gray-400 leading-relaxed text-[15px] max-w-xs">
-                  Direct MTN & Airtel integration. Contributions reach the beneficiary's wallet in real-time — no bank account needed.
-                </p>
-              </div>
 
-              <div className="flex items-center gap-3 mt-10">
-                <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">MTN MoMo</div>
-                <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">Airtel Money</div>
-                <div className="ml-auto w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center shadow-lg shadow-accent-500/30 group-hover:scale-110 transition-transform">
-                  <Zap className="w-4 h-4 text-white" />
+                <div className="flex items-center gap-3 mt-10">
+                  <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">MTN MoMo</div>
+                  <div className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-gray-300 uppercase tracking-widest">Airtel Money</div>
+                  <div className="ml-auto w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center shadow-lg shadow-accent-500/30 group-hover:scale-110 transition-transform">
+                    <Zap className="w-4 h-4 text-white" />
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Right Column — 2 stacked cards */}
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
 
               {/* Social Pledges — glass card */}
-              <div className="rounded-[2.5rem] p-9 flex flex-col justify-between group hover:border-white/20 transition-all duration-500 min-h-[200px] relative overflow-hidden"
-                style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)' }}
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-brand-400/20 border border-brand-300/20 text-brand-300 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-6 h-6" strokeWidth={1.5} />
+              <Reveal animation="reveal-right" delay="delay-100">
+                <div className="rounded-[2.5rem] p-9 flex flex-col justify-between group hover:border-white/20 transition-all duration-500 min-h-[200px] relative overflow-hidden h-full"
+                  style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)' }}
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-brand-400/20 border border-brand-300/20 text-brand-300 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-6 h-6" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">Social Pledges</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">
+                      Commit now, fulfill later. Automated reminders keep everyone accountable without the awkward follow-ups.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">Social Pledges</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    Commit now, fulfill later. Automated reminders keep everyone accountable without the awkward follow-ups.
-                  </p>
+                  <div className="flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Smart Reminders Active</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                  <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Smart Reminders Active</span>
-                </div>
-              </div>
+              </Reveal>
 
               {/* 100% Verified */}
-              <div className="bg-brand-600 rounded-[2.5rem] p-9 flex flex-col justify-between group hover:bg-brand-700 transition-all duration-500 min-h-[200px] relative overflow-hidden">
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500 rounded-full blur-2xl opacity-50 pointer-events-none"></div>
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
+              <Reveal animation="reveal-right" delay="delay-200">
+                <div className="bg-brand-600 rounded-[2.5rem] p-9 flex flex-col justify-between group hover:bg-brand-700 transition-all duration-500 min-h-[200px] relative overflow-hidden h-full">
+                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500 rounded-full blur-2xl opacity-50 pointer-events-none"></div>
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">100% Verified</h3>
+                    <p className="text-brand-100/80 text-sm leading-relaxed">
+                      Every campaign is vetted by our on-the-ground teams across Africa before going live.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-display font-black text-white mb-3 tracking-tight">100% Verified</h3>
-                  <p className="text-brand-100/80 text-sm leading-relaxed">
-                    Every campaign is vetted by our on-the-ground teams across Africa before going live.
-                  </p>
+                  <div className="relative z-10 flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
+                    <span className="text-[10px] font-black text-brand-200 uppercase tracking-widest">Vetted by ground teams</span>
+                  </div>
                 </div>
-                <div className="relative z-10 flex items-center gap-2 mt-6 pt-5 border-t border-white/10">
-                  <span className="text-[10px] font-black text-brand-200 uppercase tracking-widest">Vetted by ground teams</span>
-                </div>
-              </div>
+              </Reveal>
 
               {/* Full-width stat bar — glass */}
-              <div className="md:col-span-2 rounded-[2.5rem] px-10 py-7 flex flex-col md:flex-row items-center justify-between gap-6"
-                style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                {[
-                  { value: '10M+', label: 'UGX Raised', color: 'text-accent-400' },
-                  { value: '200+', label: 'Verified Campaigns', color: 'text-white' },
-                  { value: '15k+', label: 'Active Supporters', color: 'text-white' },
-                  { value: '8', label: 'African Countries', color: 'text-white' },
-                ].map((stat, i) => (
-                  <div key={i} className={`text-center ${i !== 0 ? 'md:border-l md:border-white/10 md:pl-8' : ''}`}>
-                    <p className={`text-3xl font-display font-black tracking-tight ${stat.color}`}>{stat.value}</p>
-                    <p className="text-[11px] font-bold text-white/30 uppercase tracking-widest mt-1">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
+              <Reveal animation="reveal-up" delay="delay-300" className="md:col-span-2">
+                <div className="rounded-[2.5rem] px-10 py-7 flex flex-col md:flex-row items-center justify-between gap-6 w-full"
+                  style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)' }}
+                >
+                  {[
+                    { value: '10M+', label: 'UGX Raised', color: 'text-accent-400' },
+                    { value: '200+', label: 'Verified Campaigns', color: 'text-white' },
+                    { value: '15k+', label: 'Active Supporters', color: 'text-white' },
+                    { value: '8', label: 'African Countries', color: 'text-white' },
+                  ].map((stat, i) => (
+                    <div key={i} className={`text-center ${i !== 0 ? 'md:border-l md:border-white/10 md:pl-8' : ''}`}>
+                      <p className={`text-3xl font-display font-black tracking-tight ${stat.color}`}>{stat.value}</p>
+                      <p className="text-[11px] font-bold text-white/30 uppercase tracking-widest mt-1">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
 
           </div>
@@ -439,13 +452,19 @@ export const Home: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
-            <span className="inline-block py-1.5 px-5 rounded-full bg-brand-950/40 border border-brand-800/50 text-brand-400 font-bold tracking-widest uppercase text-[10px] mb-6 backdrop-blur-md">
-              The PledgeCard Advantage
-            </span>
-            <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight">What We Offer</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-regular">
-              Experience a new standard of fundraising with tools designed for high impact, deep transparency, and localized accessibility.
-            </p>
+            <Reveal animation="reveal-pop">
+              <span className="inline-block py-1.5 px-5 rounded-full bg-brand-950/40 border border-brand-800/50 text-brand-400 font-bold tracking-widest uppercase text-[10px] mb-6 backdrop-blur-md">
+                The PledgeCard Advantage
+              </span>
+            </Reveal>
+            <Reveal delay="delay-100">
+              <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight">What We Offer</h2>
+            </Reveal>
+            <Reveal delay="delay-200">
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-regular">
+                Experience a new standard of fundraising with tools designed for high impact, deep transparency, and localized accessibility.
+              </p>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -455,18 +474,20 @@ export const Home: React.FC = () => {
               { icon: Briefcase, title: "CSR Management", desc: "Sophisticated corporate solutions to align business values with social impact.", glowClass: "glow-blue", iconColor: "text-brand-400", iconBg: "bg-brand-500/10" },
               { icon: Calendar, title: "Event Fundraising", desc: "Seamless integration for galas and sporting events with live tracking.", glowClass: "glow-rose", iconColor: "text-accent-400", iconBg: "bg-accent-500/10" }
             ].map((service, idx) => (
-              <div key={idx} className={`group glass-card ${service.glowClass} p-10 rounded-[2.5rem] flex flex-col items-start h-full relative overflow-hidden transition-all duration-500`}>
-                {service.badge && (
-                  <div className="absolute top-6 right-6 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase text-white tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
-                    {service.badge}
+              <Reveal key={idx} animation="reveal-up" delay={`delay-${idx * 150}`}>
+                <div className={`group glass-card ${service.glowClass} p-10 rounded-[2.5rem] flex flex-col items-start h-full relative overflow-hidden transition-all duration-500`}>
+                  {service.badge && (
+                    <div className="absolute top-6 right-6 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase text-white tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
+                      {service.badge}
+                    </div>
+                  )}
+                  <div className={`relative mb-8 w-16 h-16 flex items-center justify-center rounded-2xl ${service.iconBg} border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}>
+                    <service.icon className={`w-8 h-8 ${service.iconColor} relative z-10`} strokeWidth={1.5} />
                   </div>
-                )}
-                <div className={`relative mb-8 w-16 h-16 flex items-center justify-center rounded-2xl ${service.iconBg} border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-500`}>
-                  <service.icon className={`w-8 h-8 ${service.iconColor} relative z-10`} strokeWidth={1.5} />
+                  <h3 className="text-2xl font-bold font-display text-white mb-4 transition-colors">{service.title}</h3>
+                  <p className="text-gray-400 text-[15px] leading-relaxed font-medium">{service.desc}</p>
                 </div>
-                <h3 className="text-2xl font-bold font-display text-white mb-4 transition-colors">{service.title}</h3>
-                <p className="text-gray-400 text-[15px] leading-relaxed font-medium">{service.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -475,35 +496,31 @@ export const Home: React.FC = () => {
       {/* How It Works */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="text-brand-600 font-bold tracking-wider uppercase text-sm">Simple Process</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-16">Make an Impact in 3 Steps</h2>
+            <Reveal animation="reveal-pop">
+              <span className="text-brand-600 font-bold tracking-wider uppercase text-sm">Simple Process</span>
+            </Reveal>
+            <Reveal delay="delay-100">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-16">Make an Impact in 3 Steps</h2>
+            </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
             <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gray-200 -z-10 border-t-2 border-dashed border-gray-300"></div>
 
-            <div className="flex flex-col items-center text-center group">
-              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-gray-100 shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:border-brand-200">
-                <Heart className="w-10 h-10 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-bold font-display mb-3 text-gray-900">1. Choose a Cause</h3>
-              <p className="text-gray-500 leading-relaxed max-w-xs">Browse verified campaigns from health to education.</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center group">
-              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-gray-100 shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:border-brand-200">
-                <TrendingUp className="w-10 h-10 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-bold font-display mb-3 text-gray-900">2. Pledge or Donate</h3>
-              <p className="text-gray-500 leading-relaxed max-w-xs">Send money instantly via MM or promise to pay later.</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center group">
-              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-gray-100 shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:border-brand-200">
-                <CheckCircle2 className="w-10 h-10 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-bold font-display mb-3 text-gray-900">3. See the Change</h3>
-              <p className="text-gray-500 leading-relaxed max-w-xs">Get updates and photos when the project is completed.</p>
-            </div>
+            {[
+              { icon: Heart, title: "1. Choose a Cause", desc: "Browse verified campaigns from health to education." },
+              { icon: TrendingUp, title: "2. Pledge or Donate", desc: "Send money instantly via MM or promise to pay later." },
+              { icon: CheckCircle2, title: "3. See the Change", desc: "Get updates and photos when the project is completed." }
+            ].map((step, idx) => (
+              <Reveal key={idx} animation="reveal-up" delay={`delay-${idx * 200}`}>
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-gray-100 shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:border-brand-200">
+                    <step.icon className="w-10 h-10 text-brand-600" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display mb-3 text-gray-900">{step.title}</h3>
+                  <p className="text-gray-500 leading-relaxed max-w-xs">{step.desc}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
           
           <div className="mt-16">
@@ -518,13 +535,17 @@ export const Home: React.FC = () => {
       <section id="campaigns" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-            <div>
-              <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">Featured Campaigns</h2>
-              <p className="text-gray-600">Support verified causes making a real difference.</p>
-            </div>
-            <Link to="/campaigns" className="text-brand-700 font-semibold flex items-center hover:text-brand-800 transition-colors bg-brand-50 px-5 py-2.5 rounded-full border border-brand-100 hover:border-brand-200 shadow-sm">
-              View all campaigns <ArrowRight className="h-4 w-4 ml-2" />
-            </Link>
+            <Reveal animation="reveal-left">
+              <div>
+                <h2 className="text-3xl font-display font-bold text-gray-900 mb-2 underline decoration-brand-200 decoration-4 underline-offset-8">Featured Campaigns</h2>
+                <p className="text-gray-600 mt-4">Support verified causes making a real difference.</p>
+              </div>
+            </Reveal>
+            <Reveal animation="reveal-right">
+              <Link to="/campaigns" className="text-brand-700 font-semibold flex items-center hover:text-brand-800 transition-colors bg-brand-50 px-5 py-2.5 rounded-full border border-brand-100 hover:border-brand-200 shadow-sm">
+                View all campaigns <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+            </Reveal>
           </div>
 
           {loading ? (
@@ -535,8 +556,10 @@ export const Home: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {campaigns.slice(0, 3).map(campaign => (
-                <CampaignCard key={campaign.id} campaign={campaign} />
+              {campaigns.slice(0, 3).map((campaign, idx) => (
+                <Reveal key={campaign.id} animation="reveal-up" delay={`delay-${idx * 200}`}>
+                  <CampaignCard campaign={campaign} />
+                </Reveal>
               ))}
             </div>
           )}
@@ -551,7 +574,7 @@ export const Home: React.FC = () => {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-800 rounded-full -ml-16 -mb-16 opacity-50 blur-2xl"></div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-              <div className="space-y-8">
+              <Reveal animation="reveal-left" className="space-y-8">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-800/80 border border-brand-700 text-brand-300 text-sm font-medium backdrop-blur-sm">
                   <Sprout className="w-4 h-4" /> Success Story
                 </div>
@@ -573,8 +596,9 @@ export const Home: React.FC = () => {
                     <p className="text-brand-400 text-sm">Cooperative Chairperson, Namayingo</p>
                   </div>
                 </div>
-              </div>
-              <div className="relative mt-8 lg:mt-0">
+              </Reveal>
+              
+              <Reveal animation="reveal-right" className="relative mt-8 lg:mt-0">
                 <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-700/30 transform rotate-2 hover:rotate-0 transition-all duration-700">
                   <img src="/success-stories/borehole_success.png" alt="Success Story" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -584,14 +608,47 @@ export const Home: React.FC = () => {
                   <p className="text-gray-900 font-bold text-2xl font-display mb-1">UGX 45M</p>
                   <p className="text-gray-500 text-sm font-medium">Raised in 6 weeks</p>
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
-          <div className="mt-16 text-center">
+          
+          <Reveal animation="reveal-up" className="mt-16 text-center">
             <Link to="/stories" className="inline-flex items-center gap-2 text-gray-500 font-bold hover:text-brand-600 transition-colors">
                Explore more success stories <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <Reveal animation="reveal-pop">
+            <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-xs uppercase tracking-widest mb-8">
+              <Zap className="w-3 h-3" /> Ready to help?
+            </div>
+          </Reveal>
+          <Reveal delay="delay-100">
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-8 tracking-tight">
+              Start your journey of <br />
+              <span className="text-gradient-premium">impact today.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay="delay-200">
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+              Join thousands of Ugandans making a difference. Whether you're raising funds or giving, every action counts.
+            </p>
+          </Reveal>
+          <Reveal delay="delay-300">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <Link to="/create" className="px-10 py-5 bg-brand-600 text-white font-bold text-lg rounded-full shadow-xl shadow-brand-500/20 hover:scale-105 transition-all">
+                Start your Campaign
+              </Link>
+              <Link to="/campaigns" className="px-10 py-5 bg-white border-2 border-gray-100 text-gray-900 font-bold text-lg rounded-full hover:border-brand-200 transition-all">
+                Explore Causes
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
