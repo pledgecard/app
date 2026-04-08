@@ -51,10 +51,10 @@ export const MyCampaignCard: React.FC<MyCampaignCardProps> = ({ campaign, isPend
   return (
     <div
       className={`
-        rounded-3xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1
+        rounded-[2.5rem] overflow-hidden transition-all duration-300 transform hover:-translate-y-1
         ${isPending
-          ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 hover:border-amber-300 hover:shadow-amber-200 shadow-lg'
-          : 'bg-white border-2 border-gray-100 hover:border-brand-200 hover:shadow-brand-200 shadow-lg'
+          ? 'bg-white border-2 border-amber-100 hover:border-amber-200 hover:shadow-amber-100 shadow-xl shadow-gray-200/30'
+          : 'bg-white border text-gray-900 border-gray-100 hover:border-brand-200 hover:shadow-brand-100 shadow-xl shadow-gray-200/30'
         }
       `}
     >
