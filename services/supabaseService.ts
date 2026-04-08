@@ -238,13 +238,35 @@ export const SupabaseService = {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) return null;
 
-        const { data, error } = await supabase
+        let { data, error } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', user.id)
-            .single();
+            .maybeSingle();
 
-        if (error || !data) return null;
+        // If no profile exists (e.g. first Google OAuth sign-in), auto-create one
+        if (!data && !error) {
+            const fullName = user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split('@')[0] || 'User';
+            const { data: newProfile, error: insertError } = await supabase
+                .from('profiles')
+                .insert([{
+                    id: user.id,
+                    full_name: fullName,
+                    email: user.email,
+                    role: 'USER',
+                }])
+                .select()
+                .maybeSingle();
+
+            if (insertError) {
+                console.error('Failed to create profile for OAuth user:', insertError.message);
+                return null;
+            }
+            data = newProfile;
+        }
+
+        if (!data) return null;
+
         return {
             ...data,
             fullName: data.full_name,
